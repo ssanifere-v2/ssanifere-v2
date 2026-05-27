@@ -1247,66 +1247,163 @@
 </footer>
 
 <script>
-const PRODUITS = [
-  { emoji:'👗', nom:'Boubou Wax femme taille M', prix:'12 500', etat:'neuf', ville:'Bamako', vendeur:'Aissata K.', marque:'Artisanal', taille:'M', bg:'#FCE4EC' },
-  { emoji:'📱', nom:'Samsung Galaxy A54 128Go', prix:'195 000', etat:'be', ville:'Bamako', vendeur:'Moussa D.', marque:'Samsung', taille:'—', bg:'#E3F2FD' },
-  { emoji:'👟', nom:'Nike Air Force 1 neuves', prix:'35 000', etat:'neuf', ville:'Ségou', vendeur:'Ibrahim S.', marque:'Nike', taille:'42', bg:'#E8F5E9' },
-  { emoji:'🧸', nom:'Set jouets bébé 0-3 ans', prix:'9 500', etat:'neuf', ville:'Bamako', vendeur:'Fatoumata B.', marque:'—', taille:'—', bg:'#FFF3E0' },
-  { emoji:'💻', nom:'Laptop Dell Core i5 8Go', prix:'280 000', etat:'be', ville:'Bamako', vendeur:'Oumar T.', marque:'Dell', taille:'—', bg:'#EDE7F6' },
-];
+const API = 'https://web-production-8f94.up.railway.app';
 
-const RECENTS = [
-  { emoji:'👔', nom:'Chemise tissu Bazin homme', prix:'18 000', etat:'neuf', ville:'Bamako', vendeur:'Seydou C.', marque:'Artisanal', taille:'L', bg:'#E3F2FD' },
-  { emoji:'👶', nom:'Vêtements bébé 6-12 mois', prix:'7 000', etat:'be', ville:'Bamako', vendeur:'Kadiatou D.', marque:'OKAIDI', taille:'6M', bg:'#FCE4EC' },
-  { emoji:'🏠', nom:'Rideau salon 4 panneaux', prix:'14 000', etat:'neuf', ville:'Mopti', vendeur:'Mariam K.', marque:'—', taille:'—', bg:'#E8F5E9' },
-  { emoji:'💄', nom:'Set maquillage complet', prix:'9 000', etat:'neuf', ville:'Bamako', vendeur:'Awa N.', marque:'Mix', taille:'—', bg:'#FFF3E0' },
-  { emoji:'⚽', nom:'Ballon de foot + pompe', prix:'6 500', etat:'neuf', ville:'Bamako', vendeur:'Ali F.', marque:'Adidas', taille:'5', bg:'#E0F7FA' },
-];
+const CAT_COLORS = {
+  'mode-femme':'#FCE4EC','mode-homme':'#E3F2FD','enfants':'#FFF3E0',
+  'electronique':'#E8EAF6','maison':'#E8F5E9','sport':'#E0F7FA',
+  'beaute':'#F3E5F5','agriculture':'#F1F8E9','alimentation':'#FFF8E1',
+  'default':'#F0F4F8'
+};
 
-function etatLabel(e) {
-  if (e==='neuf') return ['etat-neuf','Neuf'];
-  if (e==='be') return ['etat-be','Bon état'];
-  return ['etat-usage','Usagé'];
+function getCatColor(cat) {
+  if (!cat) return CAT_COLORS.default;
+  const key = cat.toLowerCase().replace(/[éèê]/g,'e').replace(/\s+/g,'-');
+  for (const k of Object.keys(CAT_COLORS)) {
+    if (key.includes(k)) return CAT_COLORS[k];
+  }
+  return CAT_COLORS.default;
 }
 
-function renderGrid(data, id) {
-  document.getElementById(id).innerHTML = data.map(p => {
-    const [cls, lbl] = etatLabel(p.etat);
-    return `
-    <div class="prod-card">
-      <div class="prod-img" style="background:${p.bg}">
-        ${p.emoji}
-        <span class="prod-etat ${cls}">${lbl}</span>
-        <button class="btn-fav">🤍</button>
-      </div>
-      <div class="prod-body">
-        <div class="prod-nom">${p.nom}</div>
-        <div class="prod-tags">
-          ${p.marque!=='—'?`<span class="prod-tag">${p.marque}</span>`:''}
-          ${p.taille!=='—'?`<span class="prod-tag">${p.taille}</span>`:''}
-          <span class="prod-tag">📍 ${p.ville}</span>
-        </div>
-        <div class="prod-footer">
-          <span class="prod-prix">${p.prix} FCFA</span>
-          <span class="prod-vendeur">
-            <span class="avatar">${p.vendeur[0]}</span>
-            ${p.vendeur}
-          </span>
-        </div>
-      </div>
-    </div>`;
-  }).join('');
+function formatPrix(prix) {
+  return Number(prix).toLocaleString('fr-FR');
+}
 
+function getPremiumLabel(est_premium) {
+  return est_premium
+    ? ['etat-neuf', '⭐ Premium']
+    : ['etat-be', 'Standard'];
+}
+
+function renderProduit(p) {
+  const bg = getCatColor(p.categorie);
+  const [cls, lbl] = getPremiumLabel(p.est_premium);
+  const img = p.images && p.images.length > 0
+    ? `<img src="${p.images[0]}" alt="${p.nom}" style="width:100%;height:100%;object-fit:cover;">`
+    : `<span style="font-size:48px;">🛍️</span>`;
+  const initiale = p.nom ? p.nom[0].toUpperCase() : 'V';
+
+  return `
+  <div class="prod-card">
+    <div class="prod-img" style="background:${bg}">
+      ${img}
+      <span class="prod-etat ${cls}">${lbl}</span>
+      <button class="btn-fav">🤍</button>
+    </div>
+    <div class="prod-body">
+      <div class="prod-nom">${p.nom}</div>
+      <div class="prod-tags">
+        ${p.categorie ? `<span class="prod-tag">${p.categorie}</span>` : ''}
+      </div>
+      <div class="prod-footer">
+        <span class="prod-prix">${formatPrix(p.prix)} FCFA</span>
+        <span class="prod-vendeur">
+          <span class="avatar">${initiale}</span>
+        </span>
+      </div>
+    </div>
+  </div>`;
+}
+
+function setLoading(id, msg) {
+  document.getElementById(id).innerHTML = `
+    <div style="grid-column:span 5;text-align:center;padding:40px;color:var(--gris-text);">
+      <div style="font-size:32px;margin-bottom:12px;">⏳</div>
+      <div style="font-weight:600;">${msg}</div>
+    </div>`;
+}
+
+function setError(id, msg) {
+  document.getElementById(id).innerHTML = `
+    <div style="grid-column:span 5;text-align:center;padding:40px;color:var(--corail);">
+      <div style="font-size:32px;margin-bottom:12px;">⚠️</div>
+      <div style="font-weight:600;">${msg}</div>
+    </div>`;
+}
+
+function attachFavs(id) {
   document.getElementById(id).querySelectorAll('.btn-fav').forEach(btn => {
     btn.addEventListener('click', e => {
       e.stopPropagation();
-      btn.textContent = btn.textContent==='🤍' ? '❤️' : '🤍';
+      btn.textContent = btn.textContent === '🤍' ? '❤️' : '🤍';
     });
   });
 }
 
-renderGrid(PRODUITS, 'vedette-grid');
-renderGrid(RECENTS, 'recents-grid');
+async function loadProduits() {
+  setLoading('vedette-grid', 'Chargement des articles...');
+  setLoading('recents-grid', 'Chargement des dernières annonces...');
+
+  try {
+    const res = await fetch(`${API}/api/produits?limit=10`);
+    if (!res.ok) throw new Error('Erreur API');
+    const data = await res.json();
+    const produits = data.produits || data;
+
+    if (!produits || produits.length === 0) {
+      setError('vedette-grid', 'Aucun produit disponible');
+      setError('recents-grid', 'Aucun produit disponible');
+      return;
+    }
+
+    // Vedette = premium en premier, 5 max
+    const premium = produits.filter(p => p.est_premium).slice(0, 5);
+    const vedette = premium.length >= 5 ? premium : produits.slice(0, 5);
+    document.getElementById('vedette-grid').innerHTML = vedette.map(renderProduit).join('');
+    attachFavs('vedette-grid');
+
+    // Récents = les 5 derniers (fin du tableau)
+    const recents = [...produits].reverse().slice(0, 5);
+    document.getElementById('recents-grid').innerHTML = recents.map(renderProduit).join('');
+    attachFavs('recents-grid');
+
+  } catch (err) {
+    setError('vedette-grid', 'Impossible de charger les produits');
+    setError('recents-grid', 'Impossible de charger les produits');
+    console.error(err);
+  }
+}
+
+// Charger catégories dynamiques
+async function loadCategories() {
+  try {
+    const res = await fetch(`${API}/api/categories`);
+    if (!res.ok) return;
+    const cats = await res.json();
+    if (!cats || cats.length === 0) return;
+
+    const navInner = document.querySelector('.nav-inner');
+    // Garde "Tout" + ajoute les catégories de l'API
+    navInner.innerHTML = `<a href="#" class="nav-pill active" onclick="filterCat(null,this)">Tout</a>`;
+    cats.slice(0, 9).forEach(c => {
+      const nom = c.nom || c.name || c;
+      navInner.innerHTML += `<a href="#" class="nav-pill" onclick="filterCat('${nom}',this)">${nom}</a>`;
+    });
+  } catch(e) { /* garde nav statique */ }
+}
+
+async function filterCat(cat, el) {
+  document.querySelectorAll('.nav-pill').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+
+  setLoading('vedette-grid', 'Filtrage...');
+  try {
+    const url = cat
+      ? `${API}/api/produits?categorie=${encodeURIComponent(cat)}&limit=10`
+      : `${API}/api/produits?limit=10`;
+    const res = await fetch(url);
+    const data = await res.json();
+    const produits = data.produits || data;
+    document.getElementById('vedette-grid').innerHTML = produits.slice(0,5).map(renderProduit).join('');
+    attachFavs('vedette-grid');
+  } catch(e) {
+    setError('vedette-grid', 'Erreur lors du filtrage');
+  }
+}
+
+// Lancement
+loadCategories();
+loadProduits();
 </script>
 </body>
 </html>
