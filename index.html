@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SANI-FÉRÉ - Marketplace du Mali</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --orange: #FF6B00;
+            --orange-light: #FF8C35;
+            --dark: #1A0A00;
+            --cream: #FFF8F2;
+            --gray: #F5F0EB;
+            --gray-mid: #C4B5A5;
+            --text: #2D1A0E;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--cream);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        /* HEADER */
+        .header {
+            background: white;
+            border-bottom: 2px solid var(--gray);
+            padding: 0 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 12px rgba(255,107,0,0.08);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            height: 64px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .logo-icon { font-size: 24px; }
+
+        .logo-text {
+            font-family: 'Syne', sans-serif;
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--orange);
+            letter-spacing: -0.5px;
+        }
+
+        .search-bar {
+            flex: 1;
+            display: flex;
+            gap: 0;
+            max-width: 500px;
+        }
+
+        .search-bar input {
+            flex: 1;
+            border: 2px solid var(--gray);
+            border-right: none;
+            border-radius: 10px 0 0 10px;
+            padding: 10px 16px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .search-bar input:focus { border-color: var(--orange); }
+
+        .search-btn {
+            background: var(--orange);
+            color: white;
+            border: none;
+            border-radius: 0 10px 10px 0;
+            padding: 10px 16px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.2s;
+        }
+
+        .search-btn:hover { background: var(--orange-light); }
+
+        .nav { display: flex; gap: 8px; margin-left: auto; }
+
+        .btn {
+            padding: 9px 18px;
+            border-radius: 10px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+
+        .btn-primary { background: var(--orange); color: white; }
+        .btn-primary:hover { background: var(--orange-light); transform: translateY(-1px); }
+        .btn-ghost { background: transparent; color: var(--text); border: 2px solid var(--gray); }
+        .btn-ghost:hover { border-color: var(--orange); color: var(--orange); }
+        .btn-secondary { background: var(--gray); color: var(--text); }
+        .btn-sm { padding: 6px 14px; font-size: 13px; }
+        .btn-block { width: 100%; }
+        .btn-lg { padding: 14px 28px; font-size: 16px; }
+
+        /* CATEGORIES */
+        .category-filter {
+            background: white;
+            border-bottom: 2px solid var(--gray);
+            padding: 0 24px;
+        }
+
+        .categories {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 4px;
+            padding: 10px 0;
+            overflow-x: auto;
+        }
+
+        .category-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 2px solid transparent;
+            background: var(--gray);
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+
+        .category-btn:hover { border-color: var(--orange); color: var(--orange); }
+        .category-btn.active { background: var(--orange); color: white; }
+
+        /* HERO */
+        .hero {
+            background: linear-gradient(135deg, var(--orange) 0%, #FF8C35 100%);
+            color: white;
+            padding: 48px 24px;
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .hero h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .hero p { font-size: 16px; opacity: 0.9; margin-bottom: 24px; }
+
+        /* CONTAINER */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+        /* PRODUCTS */
+        .products-section { padding: 0 24px 48px; max-width: 1200px; margin: 0 auto; }
+
+        .products-section h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 2px solid var(--gray);
+            transition: all 0.2s;
+        }
+
+        .product-card:hover {
+            border-color: var(--orange);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(255,107,0,0.15);
+        }
+
+        .product-image {
+            height: 180px;
+            background: var(--gray);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            background: var(--gray);
+        }
+
+        .sold-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #e53e3e;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .product-info { padding: 16px; }
+
+        .product-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: var(--text);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .product-description {
+            font-size: 13px;
+            color: var(--gray-mid);
+            margin-bottom: 10px;
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .product-meta {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .product-category, .product-date {
+            font-size: 11px;
+            background: var(--gray);
+            padding: 3px 8px;
+            border-radius: 6px;
+            color: var(--gray-mid);
+        }
+
+        .product-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .product-price {
+            font-family: 'Syne', sans-serif;
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--orange);
+        }
+
+        .empty-state {
+            grid-column: 1/-1;
+            text-align: center;
+            padding: 48px;
+            color: var(--gray-mid);
+            font-size: 16px;
+        }
+
+        /* AUTH */
+        .auth-page {
+            min-height: calc(100vh - 64px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .auth-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            width: 100%;
+            max-width: 420px;
+            border: 2px solid var(--gray);
+            box-shadow: 0 20px 60px rgba(255,107,0,0.1);
+        }
+
+        .auth-card h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 28px;
+            color: var(--text);
+        }
+
+        .form-group { margin-bottom: 16px; }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 6px;
+            color: var(--text);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 2px solid var(--gray);
+            border-radius: 10px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s;
+            background: var(--cream);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus { border-color: var(--orange); }
+
+        .auth-footer { margin-top: 20px; text-align: center; font-size: 14px; color: var(--gray-mid); }
+        .auth-footer a { color: var(--orange); text-decoration: none; font-weight: 500; }
+
+        /* SELL PAGE */
+        .sell-page { padding: 32px 24px; }
+        .sell-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto;
+            border: 2px solid var(--gray);
+        }
+
+        .sell-card h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 28px;
+        }
+
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+        /* LOADING */
+        .loading {
+            text-align: center;
+            padding: 48px;
+            font-size: 16px;
+            color: var(--gray-mid);
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid var(--gray);
+            border-top-color: var(--orange);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 16px;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script>
+        const API_BASE_URL = 'https://web-production-8f94.up.railway.app';
+
+        const state = {
+            currentUser: null,
+            token: localStorage.getItem('token'),
+            currentPage: 'home',
+            products: [],
+            searchQuery: '',
+            selectedCategory: 'all',
+            loading: false
+        };
+
+        const categories = [
+            { id: 'all', name: 'Tout', icon: '🏪' },
+            { id: 'electronique', name: 'Électronique', icon: '📱' },
+            { id: 'vetements', name: 'Vêtements', icon: '👕' },
+            { id: 'maison', name: 'Maison', icon: '🏠' },
+            { id: 'beaute', name: 'Beauté', icon: '💄' },
+            { id: 'sport', name: 'Sport', icon: '⚽' },
+            { id: 'livres', name: 'Livres', icon: '📚' },
+            { id: 'jouets', name: 'Jouets', icon: '🧸' },
+            { id: 'automobile', name: 'Automobile', icon: '🚗' },
+            { id: 'autres', name: 'Autres', icon: '🔧' }
+        ];
+
+        const formatPrice = (price) => new Intl.NumberFormat('fr-FR', {
+            style: 'currency', currency: 'XOF', minimumFractionDigits: 0
+        }).format(price);
+
+        const formatDate = (dateString) => {
+            if (!dateString) return '';
+            return new Date(dateString).toLocaleDateString('fr-FR', {
+                year: 'numeric', month: 'long', day: 'numeric'
+            });
+        };
+
+        const api = {
+            async register(userData) {
+                const r = await fetch(`${API_BASE_URL}/api/auth/inscription`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(userData)
+                });
+                return r.json();
+            },
+            async login(credentials) {
+                const r = await fetch(`${API_BASE_URL}/api/auth/connexion`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(credentials)
+                });
+                return r.json();
+            },
+            async getProducts(page = 1) {
+                const r = await fetch(`${API_BASE_URL}/api/produits?page=${page}`);
+                return r.json();
+            },
+            async createProduct(productData) {
+                const r = await fetch(`${API_BASE_URL}/api/produits`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${state.token}`
+                    },
+                    body: JSON.stringify(productData)
+                });
+                return r.json();
+            },
+            async getProfile() {
+                const r = await fetch(`${API_BASE_URL}/api/utilisateurs/profil`, {
+                    headers: { 'Authorization': `Bearer ${state.token}` }
+                });
+                return r.json();
+            }
+        };
+
+        const Header = () => `
+            <header class="header">
+                <div class="header-content">
+                    <div class="logo" onclick="navigateTo('home')">
+                        <span class="logo-icon">🛍️</span>
+                        <span class="logo-text">SANI-FÉRÉ</span>
+                    </div>
+                    <div class="search-bar">
+                        <input type="text" placeholder="Rechercher un produit..." value="${state.searchQuery}" onkeyup="handleSearch(event)" />
+                        <button class="search-btn">🔍</button>
+                    </div>
+                    <nav class="nav">
+                        ${state.currentUser ? `
+                            <button class="btn btn-secondary" onclick="navigateTo('sell')">➕ Vendre</button>
+                            <button class="btn btn-ghost" onclick="navigateTo('profile')">👤 ${state.currentUser.nom}</button>
+                            <button class="btn btn-ghost" onclick="logout()">🚪</button>
+                        ` : `
+                            <button class="btn btn-ghost" onclick="navigateTo('login')">🔐 Connexion</button>
+                            <button class="btn btn-primary" onclick="navigateTo('register')">✨ Inscription</button>
+                        `}
+                    </nav>
+                </div>
+            </header>
+        `;
+
+        const CategoryFilter = () => `
+            <div class="category-filter">
+                <div class="categories">
+                    ${categories.map(cat => `
+                        <button class="category-btn ${state.selectedCategory === cat.id ? 'active' : ''}" onclick="selectCategory('${cat.id}')">
+                            <span>${cat.icon}</span>
+                            <span>${cat.name}</span>
+                        </button>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+
+        const ProductCard = (product) => `
+            <div class="product-card">
+                <div class="product-image">
+                    ${product.images && product.images.length > 0
+                        ? `<img src="${product.images[0]}" alt="${product.nom || product.titre || ''}" />`
+                        : `<div class="product-placeholder">📦</div>`
+                    }
+                    ${product.statut === 'vendu' ? '<div class="sold-badge">VENDU</div>' : ''}
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">${product.nom || product.titre || 'Produit'}</h3>
+                    <p class="product-description">${product.description ? product.description.substring(0, 100) : ''}...</p>
+                    <div class="product-meta">
+                        <span class="product-category">📁 ${product.categorie || ''}</span>
+                        <span class="product-date">📅 ${formatDate(product.date_creation)}</span>
+                    </div>
+                    <div class="product-footer">
+                        <span class="product-price">${formatPrice(product.prix)}</span>
+                        <button class="btn btn-primary btn-sm" onclick="viewProduct('${product._id}')">Voir détails</button>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        const HomePage = () => `
+            <div class="home-page">
+                ${CategoryFilter()}
+                <div class="hero">
+                    <h1>🇲🇱 Bienvenue sur SANI-FÉRÉ</h1>
+                    <p>Le marketplace #1 du Mali - Achetez et vendez en toute confiance</p>
+                    ${!state.currentUser ? `<button class="btn btn-primary btn-lg" onclick="navigateTo('register')" style="background:white;color:var(--orange);">🚀 Commencer maintenant</button>` : ''}
+                </div>
+                <div class="products-section">
+                    <h2>📦 Produits récents</h2>
+                    ${state.loading ? `<div class="loading"><div class="spinner"></div>Chargement...</div>` : `
+                    <div class="products-grid">
+                        ${state.products.length > 0
+                            ? state.products.map(p => ProductCard(p)).join('')
+                            : '<p class="empty-state">Aucun produit disponible pour le moment.</p>'
+                        }
+                    </div>`}
+                </div>
+            </div>
+        `;
+
+        const LoginPage = () => `
+            <div class="auth-page">
+                <div class="auth-card">
+                    <h2>🔐 Connexion</h2>
+                    <form onsubmit="handleLogin(event)">
+                        <div class="form-group">
+                            <label>Email ou Téléphone</label>
+                            <input type="text" name="email" required />
+                        </div>
+                        <div class="form-group">
+                            <label>Mot de passe</label>
+                            <input type="password" name="mot_de_passe" required />
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Se connecter</button>
+                    </form>
+                    <p class="auth-footer">Pas encore de compte ? <a href="#" onclick="navigateTo('register')">Inscrivez-vous</a></p>
+                </div>
+            </div>
+        `;
+
+        const RegisterPage = () => `
+            <div class="auth-page">
+                <div class="auth-card">
+                    <h2>✨ Inscription</h2>
+                    <form onsubmit="handleRegister(event)">
+                        <div class="form-group"><label>Nom complet</label><input type="text" name="nom" required /></div>
+                        <div class="form-group"><label>Email</label><input type="email" name="email" required /></div>
+                        <div class="form-group"><label>Téléphone</label><input type="tel" name="telephone" required placeholder="+223..." /></div>
+                        <div class="form-group"><label>Mot de passe</label><input type="password" name="mot_de_passe" required /></div>
+                        <div class="form-group"><label>Code de parrainage (optionnel)</label><input type="text" name="code_parrainage" /></div>
+                        <button type="submit" class="btn btn-primary btn-block">S'inscrire</button>
+                    </form>
+                    <p class="auth-footer">Déjà un compte ? <a href="#" onclick="navigateTo('login')">Connectez-vous</a></p>
+                </div>
+            </div>
+        `;
+
+        const SellPage = () => `
+            <div class="sell-page">
+                <div class="container">
+                    <div class="sell-card">
+                        <h2>📦 Vendre un produit</h2>
+                        <form onsubmit="handleCreateProduct(event)">
+                            <div class="form-group"><label>Titre du produit</label><input type="text" name="nom" required /></div>
+                            <div class="form-group"><label>Description</label><textarea name="description" rows="4" required></textarea></div>
+                            <div class="form-row">
+                                <div class="form-group"><label>Prix (FCFA)</label><input type="number" name="prix" required min="0" /></div>
+                                <div class="form-group">
+                                    <label>Catégorie</label>
+                                    <select name="categorie" required>
+                                        ${categories.filter(c => c.id !== 'all').map(c => `<option value="${c.id}">${c.icon} ${c.name}</option>`).join('')}
+                                    </select>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">✨ Publier l'annonce</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        const handleLogin = async (e) => {
+            e.preventDefault();
+            const fd = new FormData(e.target);
+            try {
+                const result = await api.login({ email: fd.get('email'), mot_de_passe: fd.get('mot_de_passe') });
+                if (result.token) {
+                    state.token = result.token;
+                    localStorage.setItem('token', result.token);
+                    state.currentUser = result.utilisateur;
+                    navigateTo('home');
+                    alert('✅ Connexion réussie !');
+                } else {
+                    alert('❌ ' + (result.detail || 'Erreur de connexion'));
+                }
+            } catch(err) { alert('❌ Erreur de connexion'); }
+        };
+
+        const handleRegister = async (e) => {
+            e.preventDefault();
+            const fd = new FormData(e.target);
+            try {
+                const result = await api.register({
+                    nom: fd.get('nom'), email: fd.get('email'),
+                    telephone: fd.get('telephone'), mot_de_passe: fd.get('mot_de_passe'),
+                    code_parrainage: fd.get('code_parrainage') || undefined
+                });
+                if (result.token) {
+                    state.token = result.token;
+                    localStorage.setItem('token', result.token);
+                    state.currentUser = result.utilisateur;
+                    navigateTo('home');
+                    alert('✅ Inscription réussie !');
+                } else {
+                    alert('❌ ' + (result.detail || "Erreur d'inscription"));
+                }
+            } catch(err) { alert("❌ Erreur d'inscription"); }
+        };
+
+        const handleCreateProduct = async (e) => {
+            e.preventDefault();
+            const fd = new FormData(e.target);
+            try {
+                const result = await api.createProduct({
+                    nom: fd.get('nom'), description: fd.get('description'),
+                    prix: parseFloat(fd.get('prix')), categorie: fd.get('categorie'), images: []
+                });
+                if (result._id) {
+                    alert('✅ Produit publié !');
+                    navigateTo('home');
+                    loadProducts();
+                } else {
+                    alert('❌ ' + (result.detail || 'Erreur de publication'));
+                }
+            } catch(err) { alert('❌ Erreur de publication'); }
+        };
+
+        const handleSearch = (e) => { state.searchQuery = e.target.value; render(); };
+        const selectCategory = (id) => { state.selectedCategory = id; render(); };
+        const logout = () => { state.currentUser = null; state.token = null; localStorage.removeItem('token'); navigateTo('home'); };
+        const navigateTo = (page) => { state.currentPage = page; render(); };
+        const viewProduct = (id) => alert(`Détails produit ${id} - À implémenter`);
+
+        const loadProducts = async () => {
+            state.loading = true;
+            render();
+            try {
+                const result = await api.getProducts();
+                if (result.produits) state.products = result.produits;
+                else if (Array.isArray(result)) state.products = result;
+                else state.products = [];
+            } catch(err) {
+                console.error('Erreur chargement:', err);
+                state.products = [];
+            }
+            state.loading = false;
+            render();
+        };
+
+        const render = () => {
+            const app = document.getElementById('app');
+            let content = '';
+            switch(state.currentPage) {
+                case 'login': content = LoginPage(); break;
+                case 'register': content = RegisterPage(); break;
+                case 'sell': content = state.currentUser ? SellPage() : LoginPage(); break;
+                default: content = HomePage();
+            }
+            app.innerHTML = Header() + content;
+        };
+
+        const init = async () => {
+            if (state.token) {
+                try {
+                    const result = await api.getProfile();
+                    if (result._id) state.currentUser = result;
+                    else { state.token = null; localStorage.removeItem('token'); }
+                } catch(e) { state.token = null; localStorage.removeItem('token'); }
+            }
+            await loadProducts();
+        };
+
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
