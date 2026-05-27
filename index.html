@@ -3,105 +3,118 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SANI-FÉRÉ PRO — Vendre & Acheter en Confiance</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<title>SANI-FÉRÉ — La boutique de confiance</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --terre: #C8510A;
-    --or: #E8A020;
-    --nuit: #0F1A12;
-    --feuille: #1E5C2E;
-    --feuille-light: #2D7A42;
-    --sable: #F5EFE6;
-    --blanc: #FAFAF8;
-    --gris: #6B7280;
-    --gris-light: #F0EDE8;
-    --rouge: #DC2626;
+    --turquoise: #00BFA5;
+    --turquoise-dark: #00897B;
+    --turquoise-light: #E0F7FA;
+    --corail: #FF6F61;
+    --corail-light: #FFF0EE;
+    --jaune: #FFD54F;
+    --jaune-light: #FFFDE7;
+    --violet: #7C4DFF;
+    --bleu: #2979FF;
+    --blanc: #FFFFFF;
+    --gris-bg: #F7F9FC;
+    --gris-card: #F0F4F8;
+    --gris-text: #6B7280;
+    --noir: #1A1A2E;
+    --noir-soft: #2D3748;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--blanc);
-    color: var(--nuit);
+    font-family: 'Quicksand', sans-serif;
+    background: var(--gris-bg);
+    color: var(--noir);
     overflow-x: hidden;
   }
 
-  /* ══════════════════════════════
+  /* ══════════════════════
      HEADER
-  ══════════════════════════════ */
+  ══════════════════════ */
   header {
+    background: var(--blanc);
+    box-shadow: 0 2px 16px rgba(0,191,165,0.10);
     position: sticky;
     top: 0;
     z-index: 100;
-    background: var(--nuit);
-    border-bottom: 2px solid var(--feuille);
   }
 
-  .header-top {
+  .header-main {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 14px 24px;
     display: flex;
     align-items: center;
     gap: 20px;
-    padding: 14px 24px;
-    max-width: 1280px;
-    margin: 0 auto;
   }
 
   .logo {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 22px;
-    color: var(--blanc);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 24px;
+    color: var(--turquoise-dark);
     text-decoration: none;
-    white-space: nowrap;
-    letter-spacing: -0.5px;
-  }
-
-  .logo span {
-    color: var(--or);
-  }
-
-  .search-bar {
-    flex: 1;
     display: flex;
     align-items: center;
-    background: rgba(255,255,255,0.08);
-    border: 1.5px solid rgba(255,255,255,0.15);
-    border-radius: 10px;
-    overflow: hidden;
-    transition: border-color 0.2s;
+    gap: 6px;
+    white-space: nowrap;
   }
 
-  .search-bar:focus-within {
-    border-color: var(--or);
+  .logo-dot {
+    width: 10px;
+    height: 10px;
+    background: var(--corail);
+    border-radius: 50%;
+    display: inline-block;
   }
 
-  .search-bar input {
+  .search-wrap {
     flex: 1;
-    padding: 10px 16px;
-    background: transparent;
-    border: none;
-    outline: none;
-    color: var(--blanc);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
+    position: relative;
   }
 
-  .search-bar input::placeholder { color: rgba(255,255,255,0.4); }
-
-  .search-bar button {
-    padding: 10px 18px;
-    background: var(--or);
-    border: none;
-    cursor: pointer;
-    color: var(--nuit);
-    font-weight: 700;
+  .search-wrap input {
+    width: 100%;
+    padding: 11px 50px 11px 18px;
+    border: 2px solid #E2E8F0;
+    border-radius: 50px;
+    font-family: 'Quicksand', sans-serif;
     font-size: 14px;
+    color: var(--noir);
+    outline: none;
+    transition: border-color 0.2s;
+    background: var(--gris-bg);
+  }
+
+  .search-wrap input:focus {
+    border-color: var(--turquoise);
+    background: var(--blanc);
+  }
+
+  .search-wrap button {
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 34px;
+    height: 34px;
+    background: var(--turquoise);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
     transition: background 0.2s;
   }
 
-  .search-bar button:hover { background: #d4911c; }
+  .search-wrap button:hover { background: var(--turquoise-dark); }
 
   .header-actions {
     display: flex;
@@ -109,105 +122,559 @@
     align-items: center;
   }
 
-  .btn-ghost {
-    padding: 8px 16px;
-    border: 1.5px solid rgba(255,255,255,0.25);
+  .btn-login {
+    padding: 9px 18px;
+    border: 2px solid var(--turquoise);
     background: transparent;
-    color: var(--blanc);
-    border-radius: 8px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s;
-    white-space: nowrap;
-  }
-
-  .btn-ghost:hover {
-    border-color: var(--or);
-    color: var(--or);
-  }
-
-  .btn-vendre {
-    padding: 9px 20px;
-    background: var(--terre);
-    color: var(--blanc);
-    border: none;
-    border-radius: 8px;
-    font-family: 'Syne', sans-serif;
+    color: var(--turquoise-dark);
+    border-radius: 50px;
+    font-family: 'Nunito', sans-serif;
     font-weight: 700;
     font-size: 13px;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: all 0.2s;
+  }
+
+  .btn-login:hover {
+    background: var(--turquoise-light);
+  }
+
+  .btn-sell {
+    padding: 9px 20px;
+    background: var(--corail);
+    color: var(--blanc);
+    border: none;
+    border-radius: 50px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
     white-space: nowrap;
   }
 
-  .btn-vendre:hover { background: #b04509; }
-
-  /* Nav catégories */
-  .header-nav {
-    background: var(--feuille);
-    padding: 0 24px;
+  .btn-sell:hover {
+    background: #e05a4d;
+    transform: translateY(-1px);
   }
 
-  .header-nav ul {
-    display: flex;
-    gap: 0;
-    list-style: none;
-    max-width: 1280px;
-    margin: 0 auto;
+  /* Nav pills */
+  .header-nav {
+    border-top: 1px solid #F0F4F8;
+    padding: 0 24px;
     overflow-x: auto;
   }
 
-  .header-nav ul::-webkit-scrollbar { display: none; }
+  .header-nav::-webkit-scrollbar { display: none; }
 
-  .header-nav li a {
-    display: block;
-    padding: 10px 18px;
-    color: rgba(255,255,255,0.85);
-    text-decoration: none;
+  .nav-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    gap: 4px;
+    padding: 8px 0;
+  }
+
+  .nav-pill {
+    padding: 6px 16px;
+    border-radius: 50px;
     font-size: 13px;
-    font-weight: 500;
+    font-weight: 600;
+    color: var(--gris-text);
+    text-decoration: none;
     white-space: nowrap;
     transition: all 0.2s;
-    border-bottom: 2px solid transparent;
+    cursor: pointer;
   }
 
-  .header-nav li a:hover,
-  .header-nav li a.active {
-    color: var(--or);
-    border-bottom-color: var(--or);
+  .nav-pill:hover, .nav-pill.active {
+    background: var(--turquoise-light);
+    color: var(--turquoise-dark);
   }
 
-  /* ══════════════════════════════
+  /* ══════════════════════
      HERO
-  ══════════════════════════════ */
+  ══════════════════════ */
   .hero {
-    background: var(--nuit);
+    background: linear-gradient(135deg, #00BFA5 0%, #00897B 50%, #00695C 100%);
+    padding: 60px 24px;
     position: relative;
     overflow: hidden;
-    padding: 60px 24px 70px;
   }
 
   .hero::before {
     content: '';
     position: absolute;
-    top: -80px; right: -80px;
-    width: 500px; height: 500px;
-    background: radial-gradient(circle, rgba(232,160,32,0.12) 0%, transparent 70%);
-    pointer-events: none;
+    top: -60px; right: -60px;
+    width: 320px; height: 320px;
+    background: rgba(255,255,255,0.07);
+    border-radius: 50%;
   }
 
   .hero::after {
     content: '';
     position: absolute;
-    bottom: -100px; left: -50px;
-    width: 400px; height: 400px;
-    background: radial-gradient(circle, rgba(30,92,46,0.25) 0%, transparent 70%);
-    pointer-events: none;
+    bottom: -80px; left: 10%;
+    width: 200px; height: 200px;
+    background: rgba(255,213,79,0.15);
+    border-radius: 50%;
   }
 
   .hero-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-left h1 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: clamp(28px, 3.5vw, 48px);
+    color: var(--blanc);
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+
+  .hero-left h1 span {
+    background: var(--jaune);
+    color: var(--noir);
+    padding: 2px 10px;
+    border-radius: 8px;
+    display: inline-block;
+  }
+
+  .hero-left p {
+    color: rgba(255,255,255,0.82);
+    font-size: 16px;
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+
+  .hero-search-big {
+    display: flex;
+    background: var(--blanc);
+    border-radius: 50px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+  }
+
+  .hero-search-big input {
+    flex: 1;
+    padding: 14px 22px;
+    border: none;
+    outline: none;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 15px;
+    color: var(--noir);
+  }
+
+  .hero-search-big button {
+    padding: 14px 28px;
+    background: var(--corail);
+    color: var(--blanc);
+    border: none;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .hero-search-big button:hover { background: #e05a4d; }
+
+  .hero-tags {
+    display: flex;
+    gap: 8px;
+    margin-top: 14px;
+    flex-wrap: wrap;
+  }
+
+  .hero-tag {
+    padding: 5px 12px;
+    background: rgba(255,255,255,0.15);
+    color: var(--blanc);
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    border: 1px solid rgba(255,255,255,0.25);
+  }
+
+  .hero-tag:hover { background: rgba(255,255,255,0.25); }
+
+  /* Hero cards flottantes */
+  .hero-right {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .float-card {
+    background: var(--blanc);
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    transition: transform 0.3s;
+    cursor: pointer;
+  }
+
+  .float-card:hover { transform: translateY(-4px); }
+
+  .float-card:first-child {
+    grid-column: span 2;
+    display: flex;
+    gap: 14px;
+    align-items: center;
+  }
+
+  .float-emoji {
+    font-size: 40px;
+    width: 64px;
+    height: 64px;
+    background: var(--turquoise-light);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .float-card:nth-child(2) .float-emoji,
+  .float-card:nth-child(3) .float-emoji {
+    width: 100%;
+    height: 80px;
+    border-radius: 10px;
+    font-size: 36px;
+    margin-bottom: 10px;
+  }
+
+  .float-card:nth-child(2) .float-emoji { background: #FFF0EE; }
+  .float-card:nth-child(3) .float-emoji { background: #F3E8FF; }
+
+  .float-title {
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--noir-soft);
+    margin-bottom: 4px;
+  }
+
+  .float-price {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 16px;
+    color: var(--corail);
+  }
+
+  .float-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    background: var(--turquoise-light);
+    color: var(--turquoise-dark);
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+  }
+
+  /* ══════════════════════
+     PROMO BAR
+  ══════════════════════ */
+  .promo-bar {
+    background: var(--jaune);
+    padding: 12px 24px;
+    overflow: hidden;
+  }
+
+  .promo-scroll {
+    display: flex;
+    gap: 48px;
+    animation: scroll-left 20s linear infinite;
+    white-space: nowrap;
+  }
+
+  @keyframes scroll-left {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .promo-item {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 13px;
+    color: var(--noir);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* ══════════════════════
+     CATÉGORIES
+  ══════════════════════ */
+  .section {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 48px 24px;
+  }
+
+  .section-title {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 24px;
+    color: var(--noir);
+    margin-bottom: 6px;
+  }
+
+  .section-sub {
+    font-size: 14px;
+    color: var(--gris-text);
+    margin-bottom: 28px;
+  }
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 28px;
+  }
+
+  .voir-plus {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--turquoise-dark);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: gap 0.2s;
+  }
+
+  .voir-plus:hover { gap: 8px; }
+
+  /* Grille catégories */
+  .cats-grid {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 12px;
+  }
+
+  .cat-item {
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.2s;
+  }
+
+  .cat-item:hover { transform: translateY(-4px); }
+
+  .cat-icon-wrap {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    margin-bottom: 8px;
+    transition: all 0.2s;
+  }
+
+  .cat-item:hover .cat-icon-wrap {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  }
+
+  .c1 { background: #E8F5E9; }
+  .c2 { background: #FFF3E0; }
+  .c3 { background: #E3F2FD; }
+  .c4 { background: #FCE4EC; }
+  .c5 { background: #EDE7F6; }
+  .c6 { background: #E0F7FA; }
+  .c7 { background: #FFF8E1; }
+  .c8 { background: #F1F8E9; }
+
+  .cat-name {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--noir-soft);
+  }
+
+  .cat-count {
+    font-size: 10px;
+    color: var(--gris-text);
+    display: block;
+    margin-top: 2px;
+  }
+
+  /* ══════════════════════
+     PRODUITS
+  ══════════════════════ */
+  .produits-bg {
+    background: var(--blanc);
+    padding: 48px 0;
+  }
+
+  .produits-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+  }
+
+  .prod-card {
+    background: var(--blanc);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.25s;
+    position: relative;
+  }
+
+  .prod-card:hover {
+    border-color: var(--turquoise);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(0,191,165,0.15);
+  }
+
+  .prod-img {
+    width: 100%;
+    aspect-ratio: 1;
+    background: var(--gris-card);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 52px;
+    position: relative;
+  }
+
+  .prod-etat {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 3px 9px;
+    border-radius: 50px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+
+  .etat-neuf { background: var(--turquoise); color: white; }
+  .etat-be { background: var(--jaune); color: var(--noir); }
+  .etat-usage { background: #E2E8F0; color: var(--gris-text); }
+
+  .btn-fav {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    background: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+  }
+
+  .btn-fav:hover { transform: scale(1.2); }
+
+  .prod-body {
+    padding: 12px 14px 16px;
+  }
+
+  .prod-nom {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--noir-soft);
+    margin-bottom: 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .prod-tags {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+  }
+
+  .prod-tag {
+    font-size: 10px;
+    color: var(--gris-text);
+    background: var(--gris-card);
+    padding: 2px 7px;
+    border-radius: 4px;
+  }
+
+  .prod-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .prod-prix {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 17px;
+    color: var(--corail);
+  }
+
+  .prod-vendeur {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    color: var(--gris-text);
+  }
+
+  .avatar {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--turquoise);
+    color: white;
+    font-size: 9px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Nunito', sans-serif;
+  }
+
+  /* ══════════════════════
+     BANNER CTA
+  ══════════════════════ */
+  .cta-section {
+    background: linear-gradient(135deg, #FF6F61 0%, #FF8A65 100%);
+    padding: 64px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: '🛍️';
+    position: absolute;
+    font-size: 180px;
+    opacity: 0.06;
+    right: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .cta-inner {
     max-width: 1280px;
     margin: 0 auto;
     display: grid;
@@ -218,483 +685,138 @@
     z-index: 1;
   }
 
-  .hero-text h1 {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: clamp(32px, 4vw, 52px);
-    color: var(--blanc);
-    line-height: 1.1;
-    margin-bottom: 20px;
+  .cta-text h2 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 36px;
+    color: white;
+    margin-bottom: 14px;
+    line-height: 1.2;
   }
 
-  .hero-text h1 em {
-    font-style: normal;
-    color: var(--or);
-  }
-
-  .hero-text p {
-    color: rgba(255,255,255,0.6);
+  .cta-text p {
+    color: rgba(255,255,255,0.85);
     font-size: 16px;
     line-height: 1.7;
-    margin-bottom: 32px;
+    margin-bottom: 28px;
   }
 
-  .hero-ctas {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-
-  .btn-primary {
-    padding: 13px 28px;
-    background: var(--or);
-    color: var(--nuit);
+  .btn-white {
+    padding: 14px 32px;
+    background: white;
+    color: var(--corail);
     border: none;
-    border-radius: 10px;
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 15px;
-    cursor: pointer;
-    transition: transform 0.2s, background 0.2s;
-  }
-
-  .btn-primary:hover { background: #d4911c; transform: translateY(-1px); }
-
-  .btn-outline {
-    padding: 13px 28px;
-    background: transparent;
-    color: var(--blanc);
-    border: 2px solid rgba(255,255,255,0.3);
-    border-radius: 10px;
-    font-family: 'Syne', sans-serif;
-    font-weight: 600;
+    border-radius: 50px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
     font-size: 15px;
     cursor: pointer;
     transition: all 0.2s;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
   }
 
-  .btn-outline:hover { border-color: var(--or); color: var(--or); }
+  .btn-white:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  }
 
-  .hero-stats {
+  .cta-steps {
     display: flex;
-    gap: 32px;
-    margin-top: 40px;
+    flex-direction: column;
+    gap: 18px;
   }
 
-  .hero-stat strong {
-    display: block;
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 28px;
-    color: var(--or);
-  }
-
-  .hero-stat span {
-    font-size: 12px;
-    color: rgba(255,255,255,0.5);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-
-  /* Hero visuel */
-  .hero-visual {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
-
-  .hero-card {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 14px;
-    overflow: hidden;
-    transition: transform 0.3s;
-    cursor: pointer;
-  }
-
-  .hero-card:hover { transform: translateY(-4px); }
-
-  .hero-card:first-child {
-    grid-column: span 2;
+  .cta-step {
     display: flex;
     align-items: center;
     gap: 16px;
-    padding: 16px;
   }
 
-  .hero-card-img {
-    width: 100%;
-    aspect-ratio: 1;
-    background: linear-gradient(135deg, var(--feuille) 0%, var(--feuille-light) 100%);
+  .step-num {
+    width: 42px;
+    height: 42px;
+    background: rgba(255,255,255,0.2);
+    border: 2px solid rgba(255,255,255,0.4);
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 36px;
-  }
-
-  .hero-card:first-child .hero-card-img {
-    width: 80px;
-    height: 80px;
-    border-radius: 10px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 18px;
+    color: white;
     flex-shrink: 0;
-    font-size: 28px;
   }
 
-  .hero-card-info { flex: 1; }
-  .hero-card-info h4 { color: var(--blanc); font-size: 14px; font-weight: 600; margin-bottom: 4px; }
-  .hero-card-info p { color: var(--or); font-size: 16px; font-weight: 700; font-family: 'Syne', sans-serif; }
-
-  .hero-card-body { padding: 12px; }
-  .hero-card-body h4 { color: var(--blanc); font-size: 13px; font-weight: 500; margin-bottom: 6px; }
-  .hero-card-body p { color: var(--or); font-size: 14px; font-weight: 700; font-family: 'Syne', sans-serif; }
-
-  /* ══════════════════════════════
-     BANNIÈRE CONFIANCE
-  ══════════════════════════════ */
-  .trust-bar {
-    background: var(--or);
-    padding: 14px 24px;
+  .cta-step p {
+    color: white;
+    font-weight: 600;
+    font-size: 15px;
+    margin: 0;
   }
 
-  .trust-bar-inner {
+  .cta-step span {
+    display: block;
+    font-size: 12px;
+    color: rgba(255,255,255,0.7);
+    font-weight: 400;
+    margin-top: 2px;
+  }
+
+  /* ══════════════════════
+     CONFIANCE
+  ══════════════════════ */
+  .confiance-bar {
+    background: var(--turquoise-light);
+    padding: 20px 24px;
+  }
+
+  .confiance-inner {
     max-width: 1280px;
     margin: 0 auto;
     display: flex;
     justify-content: space-around;
-    gap: 20px;
     flex-wrap: wrap;
-  }
-
-  .trust-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--nuit);
-  }
-
-  .trust-item span { font-size: 18px; }
-
-  /* ══════════════════════════════
-     CATÉGORIES
-  ══════════════════════════════ */
-  .section {
-    padding: 56px 24px;
-    max-width: 1280px;
-    margin: 0 auto;
-  }
-
-  .section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: 32px;
-  }
-
-  .section-header h2 {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 26px;
-    color: var(--nuit);
-  }
-
-  .section-header h2 span {
-    display: block;
-    font-size: 13px;
-    font-weight: 400;
-    color: var(--gris);
-    font-family: 'DM Sans', sans-serif;
-    margin-top: 2px;
-  }
-
-  .voir-tout {
-    color: var(--feuille);
-    text-decoration: none;
-    font-size: 13px;
-    font-weight: 600;
-    border-bottom: 1.5px solid var(--feuille);
-    transition: color 0.2s;
-  }
-
-  .voir-tout:hover { color: var(--terre); border-bottom-color: var(--terre); }
-
-  .categories-grid {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 14px;
-  }
-
-  .cat-card {
-    background: var(--gris-light);
-    border-radius: 14px;
-    padding: 20px 12px;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.25s;
-    border: 2px solid transparent;
-    text-decoration: none;
-  }
-
-  .cat-card:hover {
-    background: var(--feuille);
-    border-color: var(--feuille);
-    transform: translateY(-3px);
-  }
-
-  .cat-card:hover .cat-emoji { transform: scale(1.15); }
-  .cat-card:hover .cat-name { color: var(--blanc); }
-  .cat-card:hover .cat-count { color: rgba(255,255,255,0.6); }
-
-  .cat-emoji {
-    font-size: 30px;
-    display: block;
-    margin-bottom: 8px;
-    transition: transform 0.25s;
-  }
-
-  .cat-name {
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--nuit);
-    display: block;
-    margin-bottom: 3px;
-  }
-
-  .cat-count {
-    font-size: 11px;
-    color: var(--gris);
-    display: block;
-  }
-
-  /* ══════════════════════════════
-     PRODUITS
-  ══════════════════════════════ */
-  .produits-section {
-    background: var(--sable);
-    padding: 56px 0;
-  }
-
-  .produits-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
     gap: 16px;
   }
 
-  .produit-card {
-    background: var(--blanc);
-    border-radius: 14px;
-    overflow: hidden;
-    cursor: pointer;
-    transition: all 0.25s;
-    border: 1.5px solid transparent;
-    position: relative;
+  .confiance-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
 
-  .produit-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 32px rgba(15,26,18,0.12);
-    border-color: var(--feuille-light);
-  }
-
-  .produit-img {
-    width: 100%;
-    aspect-ratio: 1;
-    background: var(--gris-light);
+  .confiance-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--turquoise);
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 48px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .badge-etat {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    padding: 3px 8px;
-    border-radius: 6px;
-    font-size: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  .badge-neuf { background: var(--feuille); color: var(--blanc); }
-  .badge-be { background: var(--or); color: var(--nuit); }
-  .badge-usage { background: var(--gris); color: var(--blanc); }
-
-  .btn-favori {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 32px;
-    height: 32px;
-    background: var(--blanc);
-    border: none;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 16px;
-    transition: transform 0.2s;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  }
-
-  .btn-favori:hover { transform: scale(1.2); }
-
-  .produit-info {
-    padding: 12px 14px 16px;
-  }
-
-  .produit-titre {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--nuit);
-    margin-bottom: 4px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .produit-meta {
-    display: flex;
-    gap: 6px;
-    margin-bottom: 8px;
-    flex-wrap: wrap;
-  }
-
-  .tag {
-    font-size: 10px;
-    color: var(--gris);
-    background: var(--gris-light);
-    padding: 2px 7px;
-    border-radius: 4px;
-  }
-
-  .produit-prix-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .produit-prix {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 17px;
-    color: var(--terre);
-  }
-
-  .produit-vendeur {
-    font-size: 11px;
-    color: var(--gris);
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
-
-  .vendeur-avatar {
-    width: 18px;
-    height: 18px;
-    background: var(--feuille);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 9px;
-    color: var(--blanc);
-    font-weight: 700;
-  }
-
-  /* ══════════════════════════════
-     SECTION VENDEUR CTA
-  ══════════════════════════════ */
-  .vendeur-cta {
-    background: linear-gradient(135deg, var(--nuit) 0%, var(--feuille) 100%);
-    padding: 64px 24px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .vendeur-cta::before {
-    content: '🌍';
-    position: absolute;
-    font-size: 200px;
-    opacity: 0.04;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-  }
-
-  .vendeur-cta h2 {
-    font-family: 'Syne', sans-serif;
-    font-size: 36px;
-    font-weight: 800;
-    color: var(--blanc);
-    margin-bottom: 14px;
-  }
-
-  .vendeur-cta h2 span { color: var(--or); }
-
-  .vendeur-cta p {
-    color: rgba(255,255,255,0.65);
-    font-size: 16px;
-    margin-bottom: 32px;
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
-    line-height: 1.7;
-  }
-
-  .vendeur-cta .steps {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    margin-bottom: 40px;
-    flex-wrap: wrap;
-  }
-
-  .step {
-    text-align: center;
-  }
-
-  .step-num {
-    width: 44px;
-    height: 44px;
-    background: var(--or);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
     font-size: 18px;
-    color: var(--nuit);
-    margin: 0 auto 10px;
+    flex-shrink: 0;
   }
 
-  .step p {
-    font-size: 13px;
-    color: rgba(255,255,255,0.7);
-    margin: 0;
-    max-width: 120px;
+  .confiance-item strong {
+    display: block;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    color: var(--turquoise-dark);
   }
 
-  /* ══════════════════════════════
-     PRODUITS RÉCENTS (2ème grille)
-  ══════════════════════════════ */
-  .bg-blanc { background: var(--blanc); }
+  .confiance-item small {
+    font-size: 11px;
+    color: var(--gris-text);
+  }
 
-  /* ══════════════════════════════
+  /* ══════════════════════
      FOOTER
-  ══════════════════════════════ */
+  ══════════════════════ */
   footer {
-    background: var(--nuit);
-    color: rgba(255,255,255,0.65);
+    background: var(--noir);
+    color: rgba(255,255,255,0.6);
     padding: 48px 24px 24px;
   }
 
@@ -703,68 +825,66 @@
     margin: 0 auto;
   }
 
-  .footer-grid {
+  .footer-top {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr 1fr;
     gap: 40px;
     margin-bottom: 40px;
   }
 
-  .footer-brand .logo {
-    font-size: 20px;
-    display: block;
-    margin-bottom: 12px;
-  }
-
-  .footer-brand p {
-    font-size: 13px;
-    line-height: 1.7;
-    margin-bottom: 16px;
-  }
-
-  .footer-socials {
-    display: flex;
-    gap: 10px;
-  }
-
-  .social-btn {
-    width: 36px;
-    height: 36px;
-    background: rgba(255,255,255,0.08);
-    border-radius: 8px;
+  .footer-logo {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 22px;
+    color: white;
     display: flex;
     align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background 0.2s;
+    gap: 6px;
+    margin-bottom: 14px;
     text-decoration: none;
   }
 
-  .social-btn:hover { background: var(--feuille); }
+  .footer-desc {
+    font-size: 13px;
+    line-height: 1.8;
+    margin-bottom: 20px;
+  }
+
+  .footer-badges {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .footer-badge {
+    padding: 5px 12px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 50px;
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.7);
+  }
 
   .footer-col h4 {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
     font-size: 14px;
-    color: var(--blanc);
+    color: white;
     margin-bottom: 16px;
   }
 
   .footer-col ul { list-style: none; }
 
-  .footer-col li {
-    margin-bottom: 10px;
-  }
+  .footer-col li { margin-bottom: 10px; }
 
   .footer-col a {
-    color: rgba(255,255,255,0.55);
+    color: rgba(255,255,255,0.5);
     text-decoration: none;
     font-size: 13px;
     transition: color 0.2s;
   }
 
-  .footer-col a:hover { color: var(--or); }
+  .footer-col a:hover { color: var(--turquoise); }
 
   .footer-bottom {
     border-top: 1px solid rgba(255,255,255,0.08);
@@ -777,176 +897,189 @@
     font-size: 12px;
   }
 
-  .footer-bottom .flag { font-size: 16px; margin-right: 4px; }
+  .payment-icons {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
 
-  /* ══════════════════════════════
-     MOBILE RESPONSIVE
-  ══════════════════════════════ */
+  .pay-badge {
+    padding: 4px 10px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--jaune);
+  }
+
+  /* ══════════════════════
+     RESPONSIVE
+  ══════════════════════ */
   @media (max-width: 768px) {
-    .header-top { padding: 12px 16px; gap: 10px; }
-    .btn-ghost { display: none; }
-    .hero-inner { grid-template-columns: 1fr; gap: 40px; }
-    .hero-visual { display: none; }
-    .categories-grid { grid-template-columns: repeat(3, 1fr); }
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .cats-grid { grid-template-columns: repeat(4, 1fr); }
     .produits-grid { grid-template-columns: repeat(2, 1fr); }
-    .footer-grid { grid-template-columns: 1fr 1fr; }
-    .vendeur-cta .steps { gap: 20px; }
+    .cta-inner { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
   }
 
   @media (max-width: 480px) {
-    .categories-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .cats-grid { grid-template-columns: repeat(4, 1fr); gap: 8px; }
     .produits-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-    .footer-grid { grid-template-columns: 1fr; }
-    .hero-stats { gap: 20px; }
+    .footer-top { grid-template-columns: 1fr; }
   }
 
   /* Animations */
   @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
+    from { opacity: 0; transform: translateY(24px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
-  .hero-text { animation: fadeUp 0.6s ease forwards; }
-  .trust-bar { animation: fadeUp 0.4s 0.2s ease both; }
+  .hero-left { animation: fadeUp 0.5s ease forwards; }
+  .hero-right { animation: fadeUp 0.5s 0.15s ease both; }
 </style>
 </head>
 <body>
 
-<!-- ═══════════════════════════════
-     HEADER
-═══════════════════════════════ -->
+<!-- HEADER -->
 <header>
-  <div class="header-top">
-    <a href="#" class="logo">SANI-<span>FÉRÉ</span></a>
-    <div class="search-bar">
-      <input type="text" placeholder="Rechercher un article, une marque...">
-      <button>🔍 Chercher</button>
+  <div class="header-main">
+    <a href="#" class="logo">
+      SANI-FÉRÉ <span class="logo-dot"></span>
+    </a>
+    <div class="search-wrap">
+      <input type="text" placeholder="Vêtements, jouets, électronique...">
+      <button>🔍</button>
     </div>
     <div class="header-actions">
-      <button class="btn-ghost">Se connecter</button>
-      <button class="btn-vendre">+ Vendre</button>
+      <button class="btn-login">Se connecter</button>
+      <button class="btn-sell">+ Vendre</button>
     </div>
   </div>
   <nav class="header-nav">
-    <ul>
-      <li><a href="#" class="active">Accueil</a></li>
-      <li><a href="#">👗 Mode</a></li>
-      <li><a href="#">📱 Électronique</a></li>
-      <li><a href="#">🏠 Maison</a></li>
-      <li><a href="#">🧒 Enfants</a></li>
-      <li><a href="#">🚗 Auto-Moto</a></li>
-      <li><a href="#">⚽ Sport</a></li>
-      <li><a href="#">📚 Livres</a></li>
-      <li><a href="#">💄 Beauté</a></li>
-      <li><a href="#">🌾 Agriculture</a></li>
-    </ul>
+    <div class="nav-inner">
+      <a href="#" class="nav-pill active">Tout</a>
+      <a href="#" class="nav-pill">👗 Mode Femme</a>
+      <a href="#" class="nav-pill">👔 Mode Homme</a>
+      <a href="#" class="nav-pill">👶 Enfants</a>
+      <a href="#" class="nav-pill">📱 Électronique</a>
+      <a href="#" class="nav-pill">🏠 Maison</a>
+      <a href="#" class="nav-pill">⚽ Sport</a>
+      <a href="#" class="nav-pill">📚 Livres</a>
+      <a href="#" class="nav-pill">💄 Beauté</a>
+      <a href="#" class="nav-pill">🌾 Agriculture</a>
+    </div>
   </nav>
 </header>
 
-<!-- ═══════════════════════════════
-     HERO
-═══════════════════════════════ -->
+<!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
-    <div class="hero-text">
-      <h1>Vendre & Acheter<br>en <em>Confiance</em><br>au Mali</h1>
-      <p>La marketplace de référence pour les Maliens.<br>Des milliers d'articles disponibles — mode, électronique, maison et plus.</p>
-      <div class="hero-ctas">
-        <button class="btn-primary">Découvrir les articles</button>
-        <button class="btn-outline">Vendre mon article</button>
+    <div class="hero-left">
+      <h1>La boutique<br>de <span>confiance</span><br>pour toute la famille</h1>
+      <p>Des milliers d'articles pour femmes, hommes et enfants.<br>Achetez et vendez facilement au Mali.</p>
+      <div class="hero-search-big">
+        <input type="text" placeholder="Que recherchez-vous aujourd'hui ?">
+        <button>Rechercher</button>
       </div>
-      <div class="hero-stats">
-        <div class="hero-stat">
-          <strong>12 400+</strong>
-          <span>Articles</span>
-        </div>
-        <div class="hero-stat">
-          <strong>3 200+</strong>
-          <span>Vendeurs</span>
-        </div>
-        <div class="hero-stat">
-          <strong>8 villes</strong>
-          <span>au Mali</span>
-        </div>
+      <div class="hero-tags">
+        <span class="hero-tag">👗 Robes Wax</span>
+        <span class="hero-tag">👟 Chaussures</span>
+        <span class="hero-tag">📱 Téléphones</span>
+        <span class="hero-tag">🧸 Jouets</span>
+        <span class="hero-tag">🏠 Meubles</span>
       </div>
     </div>
-
-    <div class="hero-visual">
-      <div class="hero-card">
-        <div class="hero-card-img">👗</div>
-        <div class="hero-card-info">
-          <h4>Robe Wax Premium</h4>
-          <p>15 000 FCFA</p>
+    <div class="hero-right">
+      <div class="float-card">
+        <div class="float-emoji">👗</div>
+        <div>
+          <div class="float-badge">Nouveau</div>
+          <div class="float-title">Robe Wax Premium taille M</div>
+          <div class="float-price">12 500 FCFA</div>
         </div>
       </div>
-      <div class="hero-card">
-        <div class="hero-card-img">📱</div>
-        <div class="hero-card-body">
-          <h4>iPhone 12 — Bon état</h4>
-          <p>185 000 FCFA</p>
-        </div>
+      <div class="float-card">
+        <div class="float-emoji">🧸</div>
+        <div class="float-badge">Neuf</div>
+        <div class="float-title">Set jouets enfants 3-6 ans</div>
+        <div class="float-price">8 000 FCFA</div>
       </div>
-      <div class="hero-card">
-        <div class="hero-card-img">🛋️</div>
-        <div class="hero-card-body">
-          <h4>Canapé 3 places</h4>
-          <p>75 000 FCFA</p>
-        </div>
+      <div class="float-card">
+        <div class="float-emoji">👟</div>
+        <div class="float-badge">Bon état</div>
+        <div class="float-title">Basket Nike taille 40</div>
+        <div class="float-price">22 000 FCFA</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════
-     TRUST BAR
-═══════════════════════════════ -->
-<div class="trust-bar">
-  <div class="trust-bar-inner">
-    <div class="trust-item"><span>🔒</span> Paiements sécurisés</div>
-    <div class="trust-item"><span>✅</span> Vendeurs vérifiés</div>
-    <div class="trust-item"><span>🚚</span> Livraison partout au Mali</div>
-    <div class="trust-item"><span>📞</span> Support 7j/7</div>
-    <div class="trust-item"><span>🔄</span> Retour facile</div>
+<!-- PROMO BAR -->
+<div class="promo-bar">
+  <div class="promo-scroll">
+    <span class="promo-item">🎉 Livraison gratuite dès 15 000 FCFA</span>
+    <span class="promo-item">✅ Vendeurs 100% vérifiés</span>
+    <span class="promo-item">🔒 Paiement sécurisé Orange Money & Wave</span>
+    <span class="promo-item">🔄 Retour facile sous 7 jours</span>
+    <span class="promo-item">📞 Service client disponible 7j/7</span>
+    <span class="promo-item">🎉 Livraison gratuite dès 15 000 FCFA</span>
+    <span class="promo-item">✅ Vendeurs 100% vérifiés</span>
+    <span class="promo-item">🔒 Paiement sécurisé Orange Money & Wave</span>
+    <span class="promo-item">🔄 Retour facile sous 7 jours</span>
+    <span class="promo-item">📞 Service client disponible 7j/7</span>
   </div>
 </div>
 
-<!-- ═══════════════════════════════
-     CATÉGORIES
-═══════════════════════════════ -->
-<div class="bg-blanc">
-  <div class="section">
+<!-- CATÉGORIES -->
+<div style="background: var(--blanc); padding: 48px 0;">
+  <div class="section" style="padding-top:0; padding-bottom:0;">
     <div class="section-header">
-      <h2>Parcourir les catégories <span>Trouvez exactement ce que vous cherchez</span></h2>
-      <a href="#" class="voir-tout">Tout voir →</a>
+      <div>
+        <div class="section-title">Toutes les catégories</div>
+        <div class="section-sub">Explorez nos univers pour toute la famille</div>
+      </div>
+      <a href="#" class="voir-plus">Voir tout →</a>
     </div>
-    <div class="categories-grid">
-      <a href="#" class="cat-card">
-        <span class="cat-emoji">👗</span>
+    <div class="cats-grid">
+      <a href="#" class="cat-item">
+        <div class="cat-icon-wrap c4">👗</div>
         <span class="cat-name">Mode Femme</span>
         <span class="cat-count">4 230 articles</span>
       </a>
-      <a href="#" class="cat-card">
-        <span class="cat-emoji">👔</span>
+      <a href="#" class="cat-item">
+        <div class="cat-icon-wrap c2">👔</div>
         <span class="cat-name">Mode Homme</span>
         <span class="cat-count">2 110 articles</span>
       </a>
-      <a href="#" class="cat-card">
-        <span class="cat-emoji">📱</span>
+      <a href="#" class="cat-item">
+        <div class="cat-icon-wrap c5">👶</div>
+        <span class="cat-name">Enfants</span>
+        <span class="cat-count">3 450 articles</span>
+      </a>
+      <a href="#" class="cat-item">
+        <div class="cat-icon-wrap c3">📱</div>
         <span class="cat-name">Électronique</span>
         <span class="cat-count">1 850 articles</span>
       </a>
-      <a href="#" class="cat-card">
-        <span class="cat-emoji">🏠</span>
+      <a href="#" class="cat-item">
+        <div class="cat-icon-wrap c1">🏠</div>
         <span class="cat-name">Maison & Déco</span>
         <span class="cat-count">980 articles</span>
       </a>
-      <a href="#" class="cat-card">
-        <span class="cat-emoji">🧒</span>
-        <span class="cat-name">Enfants</span>
-        <span class="cat-count">1 340 articles</span>
+      <a href="#" class="cat-item">
+        <div class="cat-icon-wrap c7">⚽</div>
+        <span class="cat-name">Sport & Loisirs</span>
+        <span class="cat-count">640 articles</span>
       </a>
-      <a href="#" class="cat-card">
-        <span class="cat-emoji">🌾</span>
+      <a href="#" class="cat-item">
+        <div class="cat-icon-wrap c6">💄</div>
+        <span class="cat-name">Beauté & Soins</span>
+        <span class="cat-count">1 120 articles</span>
+      </a>
+      <a href="#" class="cat-item">
+        <div class="cat-icon-wrap c8">🌾</div>
         <span class="cat-name">Agriculture</span>
         <span class="cat-count">760 articles</span>
       </a>
@@ -954,105 +1087,160 @@
   </div>
 </div>
 
-<!-- ═══════════════════════════════
-     PRODUITS EN VEDETTE
-═══════════════════════════════ -->
-<div class="produits-section">
+<!-- PRODUITS EN VEDETTE -->
+<div class="produits-bg">
   <div class="section">
     <div class="section-header">
-      <h2>Articles en vedette <span>Sélectionnés pour vous aujourd'hui</span></h2>
-      <a href="#" class="voir-tout">Voir tout →</a>
+      <div>
+        <div class="section-title">Articles en vedette</div>
+        <div class="section-sub">Sélectionnés pour vous aujourd'hui</div>
+      </div>
+      <a href="#" class="voir-plus">Voir tout →</a>
     </div>
-    <div class="produits-grid" id="produits-vedette"></div>
+    <div class="produits-grid" id="vedette-grid"></div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════
-     VENDEUR CTA
-═══════════════════════════════ -->
-<section class="vendeur-cta">
-  <h2>Commencez à <span>vendre dès aujourd'hui</span></h2>
-  <p>Rejoignez des milliers de vendeurs au Mali. C'est gratuit, simple et rapide.</p>
-  <div class="steps">
-    <div class="step">
-      <div class="step-num">1</div>
-      <p>Créez votre compte vendeur</p>
+<!-- CTA VENDEUR -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <div class="cta-text">
+      <h2>Vendez vos articles facilement !</h2>
+      <p>Rejoignez des milliers de vendeurs sur SANI-FÉRÉ. Publiez vos articles en quelques minutes et commencez à gagner.</p>
+      <button class="btn-white">Créer mon compte vendeur →</button>
     </div>
-    <div class="step">
-      <div class="step-num">2</div>
-      <p>Publiez votre article avec photos</p>
-    </div>
-    <div class="step">
-      <div class="step-num">3</div>
-      <p>Recevez vos paiements</p>
+    <div class="cta-steps">
+      <div class="cta-step">
+        <div class="step-num">1</div>
+        <div>
+          <p>Créez votre compte</p>
+          <span>Inscription gratuite en 2 minutes</span>
+        </div>
+      </div>
+      <div class="cta-step">
+        <div class="step-num">2</div>
+        <div>
+          <p>Publiez votre article</p>
+          <span>Photos, description, prix — c'est simple</span>
+        </div>
+      </div>
+      <div class="cta-step">
+        <div class="step-num">3</div>
+        <div>
+          <p>Recevez vos paiements</p>
+          <span>Via Orange Money ou Wave</span>
+        </div>
+      </div>
     </div>
   </div>
-  <button class="btn-primary" style="font-size:16px; padding:15px 36px;">Créer mon compte vendeur →</button>
 </section>
 
-<!-- ═══════════════════════════════
-     DERNIÈRES ANNONCES
-═══════════════════════════════ -->
-<div class="bg-blanc">
-  <div class="section">
+<!-- NOUVELLES ANNONCES -->
+<div style="background: var(--gris-bg); padding: 48px 0;">
+  <div class="section" style="padding-top:0; padding-bottom:0;">
     <div class="section-header">
-      <h2>Dernières annonces <span>Ajoutées il y a moins de 24h</span></h2>
-      <a href="#" class="voir-tout">Voir tout →</a>
+      <div>
+        <div class="section-title">Dernières annonces</div>
+        <div class="section-sub">Ajoutées il y a moins de 24h</div>
+      </div>
+      <a href="#" class="voir-plus">Voir tout →</a>
     </div>
-    <div class="produits-grid" id="produits-recents"></div>
+    <div class="produits-grid" id="recents-grid"></div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════
-     FOOTER
-═══════════════════════════════ -->
+<!-- CONFIANCE -->
+<div class="confiance-bar">
+  <div class="confiance-inner">
+    <div class="confiance-item">
+      <div class="confiance-icon">🔒</div>
+      <div>
+        <strong>Paiements sécurisés</strong>
+        <small>Orange Money & Wave</small>
+      </div>
+    </div>
+    <div class="confiance-item">
+      <div class="confiance-icon">✅</div>
+      <div>
+        <strong>Vendeurs vérifiés</strong>
+        <small>Tous contrôlés par nos équipes</small>
+      </div>
+    </div>
+    <div class="confiance-item">
+      <div class="confiance-icon">🚚</div>
+      <div>
+        <strong>Livraison Mali</strong>
+        <small>Bamako & 7 autres villes</small>
+      </div>
+    </div>
+    <div class="confiance-item">
+      <div class="confiance-icon">🔄</div>
+      <div>
+        <strong>Retour facile</strong>
+        <small>7 jours pour changer d'avis</small>
+      </div>
+    </div>
+    <div class="confiance-item">
+      <div class="confiance-icon">📞</div>
+      <div>
+        <strong>Support 7j/7</strong>
+        <small>Toujours là pour vous aider</small>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
 <footer>
   <div class="footer-inner">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="#" class="logo">SANI-<span>FÉRÉ</span></a>
-        <p>La marketplace de confiance pour vendre et acheter au Mali. Des milliers d'articles, des vendeurs vérifiés, une expérience sécurisée.</p>
-        <div class="footer-socials">
-          <a href="#" class="social-btn">📘</a>
-          <a href="#" class="social-btn">📸</a>
-          <a href="#" class="social-btn">🐦</a>
-          <a href="#" class="social-btn">💬</a>
+    <div class="footer-top">
+      <div>
+        <a href="#" class="footer-logo">SANI-FÉRÉ <span class="logo-dot"></span></a>
+        <p class="footer-desc">La boutique de confiance pour toute la famille malienne. Achetez et vendez facilement, en toute sécurité.</p>
+        <div class="footer-badges">
+          <span class="footer-badge">🇲🇱 Mali</span>
+          <span class="footer-badge">🔒 Sécurisé</span>
+          <span class="footer-badge">✅ Vérifié</span>
         </div>
       </div>
       <div class="footer-col">
-        <h4>Marketplace</h4>
+        <h4>Acheter</h4>
         <ul>
           <li><a href="#">Toutes les catégories</a></li>
           <li><a href="#">Nouveautés</a></li>
-          <li><a href="#">Meilleures ventes</a></li>
           <li><a href="#">Promotions</a></li>
-          <li><a href="#">Vendeurs pro</a></li>
+          <li><a href="#">Mode enfants</a></li>
+          <li><a href="#">Électronique</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Vendre</h4>
+        <ul>
+          <li><a href="#">Créer un compte</a></li>
+          <li><a href="#">Publier un article</a></li>
+          <li><a href="#">Guide vendeur</a></li>
+          <li><a href="#">Tarifs</a></li>
+          <li><a href="#">Conseils photos</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Aide</h4>
         <ul>
           <li><a href="#">Centre d'aide</a></li>
-          <li><a href="#">Comment vendre</a></li>
-          <li><a href="#">Comment acheter</a></li>
+          <li><a href="#">Nous contacter</a></li>
           <li><a href="#">Paiements</a></li>
           <li><a href="#">Livraison</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>SANI-FÉRÉ</h4>
-        <ul>
-          <li><a href="#">À propos</a></li>
-          <li><a href="#">Blog</a></li>
-          <li><a href="#">Carrières</a></li>
-          <li><a href="#">Presse</a></li>
-          <li><a href="#">Contact</a></li>
+          <li><a href="#">Retours</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span><span class="flag">🇲🇱</span> SANI-FÉRÉ PRO — Bamako, Mali © 2025</span>
-      <span>Paiements via <strong style="color:var(--or)">Orange Money</strong> & <strong style="color:var(--or)">Wave</strong></span>
+      <span>© 2025 SANI-FÉRÉ — Bamako, Mali 🇲🇱</span>
+      <div class="payment-icons">
+        <span style="font-size:12px; color:rgba(255,255,255,0.4); margin-right:4px;">Paiements :</span>
+        <span class="pay-badge">Orange Money</span>
+        <span class="pay-badge">Wave</span>
+      </div>
       <span><a href="#" style="color:inherit">Confidentialité</a> · <a href="#" style="color:inherit">CGU</a></span>
     </div>
   </div>
@@ -1060,70 +1248,65 @@
 
 <script>
 const PRODUITS = [
-  { emoji: '👗', titre: 'Boubou Wax femme taille M', prix: '12 500', etat: 'Neuf', vendeur: 'Aissata K.', ville: 'Bamako', marque: 'Artisanal', taille: 'M' },
-  { emoji: '📱', titre: 'Samsung Galaxy A54 128Go', prix: '195 000', etat: 'Bon état', vendeur: 'Moussa D.', ville: 'Bamako', marque: 'Samsung', taille: '—' },
-  { emoji: '👟', titre: 'Nike Air Force 1 neuves', prix: '35 000', etat: 'Neuf', vendeur: 'Ibrahim S.', ville: 'Ségou', marque: 'Nike', taille: '42' },
-  { emoji: '🛋️', titre: 'Table basse en bois de rônier', prix: '28 000', etat: 'Bon état', vendeur: 'Fatoumata B.', ville: 'Bamako', marque: '—', taille: '—' },
-  { emoji: '💻', titre: 'Laptop Dell Core i5 8Go RAM', prix: '280 000', etat: 'Bon état', vendeur: 'Oumar T.', ville: 'Bamako', marque: 'Dell', taille: '—' },
-  { emoji: '👕', titre: 'Lot de 5 t-shirts homme L', prix: '8 000', etat: 'Neuf', vendeur: 'Seydou C.', ville: 'Sikasso', marque: 'Mix', taille: 'L' },
-  { emoji: '🍳', titre: 'Set cuisine 12 pièces inox', prix: '22 000', etat: 'Neuf', vendeur: 'Mariam K.', ville: 'Mopti', marque: '—', taille: '—' },
-  { emoji: '🎒', titre: 'Sac à dos école enfant', prix: '6 500', etat: 'Neuf', vendeur: 'Kadiatou D.', ville: 'Bamako', marque: 'Adidas', taille: '—' },
-  { emoji: '🚲', titre: 'Vélo enfant 20 pouces', prix: '45 000', etat: 'Bon état', vendeur: 'Ali F.', ville: 'Bamako', marque: '—', taille: '—' },
-  { emoji: '📺', titre: 'Télé Samsung 43" Smart TV', prix: '320 000', etat: 'Neuf', vendeur: 'Drissa K.', ville: 'Koulikoro', marque: 'Samsung', taille: '43"' },
+  { emoji:'👗', nom:'Boubou Wax femme taille M', prix:'12 500', etat:'neuf', ville:'Bamako', vendeur:'Aissata K.', marque:'Artisanal', taille:'M', bg:'#FCE4EC' },
+  { emoji:'📱', nom:'Samsung Galaxy A54 128Go', prix:'195 000', etat:'be', ville:'Bamako', vendeur:'Moussa D.', marque:'Samsung', taille:'—', bg:'#E3F2FD' },
+  { emoji:'👟', nom:'Nike Air Force 1 neuves', prix:'35 000', etat:'neuf', ville:'Ségou', vendeur:'Ibrahim S.', marque:'Nike', taille:'42', bg:'#E8F5E9' },
+  { emoji:'🧸', nom:'Set jouets bébé 0-3 ans', prix:'9 500', etat:'neuf', ville:'Bamako', vendeur:'Fatoumata B.', marque:'—', taille:'—', bg:'#FFF3E0' },
+  { emoji:'💻', nom:'Laptop Dell Core i5 8Go', prix:'280 000', etat:'be', ville:'Bamako', vendeur:'Oumar T.', marque:'Dell', taille:'—', bg:'#EDE7F6' },
 ];
 
 const RECENTS = [
-  { emoji: '💄', titre: 'Set maquillage complet', prix: '9 000', etat: 'Neuf', vendeur: 'Awa N.', ville: 'Bamako', marque: 'Mix', taille: '—' },
-  { emoji: '🌾', titre: 'Semences mil 50kg', prix: '18 000', etat: 'Neuf', vendeur: 'Coumba D.', ville: 'Ségou', marque: '—', taille: '—' },
-  { emoji: '🎸', titre: 'Guitare acoustique kora', prix: '55 000', etat: 'Bon état', vendeur: 'Lassina T.', ville: 'Bamako', marque: 'Artisanal', taille: '—' },
-  { emoji: '👜', titre: 'Sac à main cuir véritable', prix: '14 000', etat: 'Bon état', vendeur: 'Rokia C.', ville: 'Bamako', marque: '—', taille: '—' },
-  { emoji: '🔧', titre: 'Outillage bricolage complet', prix: '32 000', etat: 'Bon état', vendeur: 'Bakary S.', ville: 'Kayes', marque: 'Stanley', taille: '—' },
+  { emoji:'👔', nom:'Chemise tissu Bazin homme', prix:'18 000', etat:'neuf', ville:'Bamako', vendeur:'Seydou C.', marque:'Artisanal', taille:'L', bg:'#E3F2FD' },
+  { emoji:'👶', nom:'Vêtements bébé 6-12 mois', prix:'7 000', etat:'be', ville:'Bamako', vendeur:'Kadiatou D.', marque:'OKAIDI', taille:'6M', bg:'#FCE4EC' },
+  { emoji:'🏠', nom:'Rideau salon 4 panneaux', prix:'14 000', etat:'neuf', ville:'Mopti', vendeur:'Mariam K.', marque:'—', taille:'—', bg:'#E8F5E9' },
+  { emoji:'💄', nom:'Set maquillage complet', prix:'9 000', etat:'neuf', ville:'Bamako', vendeur:'Awa N.', marque:'Mix', taille:'—', bg:'#FFF3E0' },
+  { emoji:'⚽', nom:'Ballon de foot + pompe', prix:'6 500', etat:'neuf', ville:'Bamako', vendeur:'Ali F.', marque:'Adidas', taille:'5', bg:'#E0F7FA' },
 ];
 
-function getEtatBadge(etat) {
-  if (etat === 'Neuf') return 'badge-neuf';
-  if (etat === 'Bon état') return 'badge-be';
-  return 'badge-usage';
+function etatLabel(e) {
+  if (e==='neuf') return ['etat-neuf','Neuf'];
+  if (e==='be') return ['etat-be','Bon état'];
+  return ['etat-usage','Usagé'];
 }
 
-function renderProduits(data, containerId) {
-  const container = document.getElementById(containerId);
-  container.innerHTML = data.map(p => `
-    <div class="produit-card">
-      <div class="produit-img">
+function renderGrid(data, id) {
+  document.getElementById(id).innerHTML = data.map(p => {
+    const [cls, lbl] = etatLabel(p.etat);
+    return `
+    <div class="prod-card">
+      <div class="prod-img" style="background:${p.bg}">
         ${p.emoji}
-        <span class="badge-etat ${getEtatBadge(p.etat)}">${p.etat}</span>
-        <button class="btn-favori">🤍</button>
+        <span class="prod-etat ${cls}">${lbl}</span>
+        <button class="btn-fav">🤍</button>
       </div>
-      <div class="produit-info">
-        <div class="produit-titre">${p.titre}</div>
-        <div class="produit-meta">
-          ${p.marque !== '—' ? `<span class="tag">${p.marque}</span>` : ''}
-          ${p.taille !== '—' ? `<span class="tag">${p.taille}</span>` : ''}
-          <span class="tag">📍 ${p.ville}</span>
+      <div class="prod-body">
+        <div class="prod-nom">${p.nom}</div>
+        <div class="prod-tags">
+          ${p.marque!=='—'?`<span class="prod-tag">${p.marque}</span>`:''}
+          ${p.taille!=='—'?`<span class="prod-tag">${p.taille}</span>`:''}
+          <span class="prod-tag">📍 ${p.ville}</span>
         </div>
-        <div class="produit-prix-row">
-          <span class="produit-prix">${p.prix} FCFA</span>
-          <span class="produit-vendeur">
-            <span class="vendeur-avatar">${p.vendeur[0]}</span>
+        <div class="prod-footer">
+          <span class="prod-prix">${p.prix} FCFA</span>
+          <span class="prod-vendeur">
+            <span class="avatar">${p.vendeur[0]}</span>
             ${p.vendeur}
           </span>
         </div>
       </div>
-    </div>
-  `).join('');
+    </div>`;
+  }).join('');
 
-  // Favoris toggle
-  container.querySelectorAll('.btn-favori').forEach(btn => {
+  document.getElementById(id).querySelectorAll('.btn-fav').forEach(btn => {
     btn.addEventListener('click', e => {
       e.stopPropagation();
-      btn.textContent = btn.textContent === '🤍' ? '❤️' : '🤍';
+      btn.textContent = btn.textContent==='🤍' ? '❤️' : '🤍';
     });
   });
 }
 
-renderProduits(PRODUITS, 'produits-vedette');
-renderProduits(RECENTS, 'produits-recents');
+renderGrid(PRODUITS, 'vedette-grid');
+renderGrid(RECENTS, 'recents-grid');
 </script>
 </body>
 </html>
