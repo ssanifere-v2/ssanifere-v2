@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Connexion — SANI-FÉRÉ</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --turquoise: #00BFA5;
+    --turquoise-dark: #00897B;
+    --turquoise-light: #E0F7FA;
+    --corail: #FF6F61;
+    --gris-bg: #F7F9FC;
+    --gris-text: #6B7280;
+    --noir: #1A1A2E;
+    --blanc: #FFFFFF;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Quicksand', sans-serif;
+    background: var(--gris-bg);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--blanc);
+    box-shadow: 0 2px 12px rgba(0,191,165,0.10);
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 22px;
+    color: var(--turquoise-dark);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .logo-dot { width: 8px; height: 8px; background: var(--corail); border-radius: 50%; }
+
+  /* MAIN */
+  main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+  }
+
+  .card {
+    background: var(--blanc);
+    border-radius: 24px;
+    padding: 40px;
+    width: 100%;
+    max-width: 440px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+  }
+
+  .card-title {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 26px;
+    color: var(--noir);
+    margin-bottom: 6px;
+  }
+  .card-sub {
+    font-size: 14px;
+    color: var(--gris-text);
+    margin-bottom: 32px;
+  }
+
+  .form-group { margin-bottom: 20px; }
+  label {
+    display: block;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--noir);
+    margin-bottom: 7px;
+  }
+  input {
+    width: 100%;
+    padding: 13px 16px;
+    border: 2px solid #E2E8F0;
+    border-radius: 12px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 14px;
+    color: var(--noir);
+    outline: none;
+    transition: border-color 0.2s;
+    background: var(--gris-bg);
+  }
+  input:focus { border-color: var(--turquoise); background: var(--blanc); }
+
+  .btn-submit {
+    width: 100%;
+    padding: 14px;
+    background: var(--turquoise);
+    color: var(--blanc);
+    border: none;
+    border-radius: 12px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 8px;
+  }
+  .btn-submit:hover { background: var(--turquoise-dark); transform: translateY(-1px); }
+  .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+  .divider {
+    text-align: center;
+    color: var(--gris-text);
+    font-size: 13px;
+    margin: 20px 0;
+    position: relative;
+  }
+  .divider::before, .divider::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 42%;
+    height: 1px;
+    background: #E2E8F0;
+  }
+  .divider::before { left: 0; }
+  .divider::after { right: 0; }
+
+  .link-switch {
+    text-align: center;
+    font-size: 14px;
+    color: var(--gris-text);
+  }
+  .link-switch a {
+    color: var(--turquoise-dark);
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .link-switch a:hover { text-decoration: underline; }
+
+  .msg {
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    display: none;
+  }
+  .msg.error { background: #FFF0EE; color: #e05a4d; border: 1px solid #FFD5D0; }
+  .msg.success { background: var(--turquoise-light); color: var(--turquoise-dark); border: 1px solid #B2DFDB; }
+  .msg.show { display: block; }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="/" class="logo">SANI-FÉRÉ <span class="logo-dot"></span></a>
+  <span style="font-size:13px; color:var(--gris-text);">🇲🇱 Mali</span>
+</header>
+
+<main>
+  <div class="card">
+    <div class="card-title">Connexion</div>
+    <div class="card-sub">Accédez à votre compte SANI-FÉRÉ</div>
+
+    <div id="msg" class="msg"></div>
+
+    <div class="form-group">
+      <label>Téléphone ou Email</label>
+      <input type="text" id="login" placeholder="Ex: 70000000 ou email@mail.com">
+    </div>
+    <div class="form-group">
+      <label>Mot de passe</label>
+      <input type="password" id="password" placeholder="Votre mot de passe">
+    </div>
+
+    <button class="btn-submit" id="btn-login" onclick="login()">Se connecter</button>
+
+    <div class="divider">ou</div>
+
+    <div class="link-switch">
+      Pas encore de compte ? <a href="/inscription.html">Créer un compte →</a>
+    </div>
+  </div>
+</main>
+
+<script>
+const API = 'https://web-production-8f94.up.railway.app';
+
+function showMsg(text, type) {
+  const el = document.getElementById('msg');
+  el.textContent = text;
+  el.className = `msg ${type} show`;
+}
+
+async function login() {
+  const login = document.getElementById('login').value.trim();
+  const password = document.getElementById('password').value.trim();
+  const btn = document.getElementById('btn-login');
+
+  if (!login || !password) {
+    showMsg('Veuillez remplir tous les champs.', 'error');
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Connexion...';
+
+  try {
+    const res = await fetch(`${API}/api/auth/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ telephone: login, mot_de_passe: password })
+    });
+
+    const data = await res.json();
+
+    if (res.ok && data.token) {
+      localStorage.setItem('sf_token', data.token);
+      localStorage.setItem('sf_user', JSON.stringify(data.utilisateur || data.user || {}));
+      showMsg('Connexion réussie ! Redirection...', 'success');
+      setTimeout(() => window.location.href = '/', 1200);
+    } else {
+      showMsg(data.detail || data.message || 'Téléphone ou mot de passe incorrect.', 'error');
+      btn.disabled = false;
+      btn.textContent = 'Se connecter';
+    }
+  } catch (err) {
+    showMsg('Erreur de connexion. Réessayez.', 'error');
+    btn.disabled = false;
+    btn.textContent = 'Se connecter';
+  }
+}
+
+// Entrée = soumettre
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter') login();
+});
+</script>
+</body>
+</html>
