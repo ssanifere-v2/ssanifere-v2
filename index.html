@@ -291,14 +291,15 @@ function render(){
     const media = lk.img ? `<img src="${lk.img}" alt="${p.nom}" loading="lazy">`
                          : `<div class="ph" style="background:${lk.bg}">${lk.e}</div>`;
     return `<div class="card">
-      <div class="imgwrap">${media}
+      <div class="imgwrap">
+        <div onclick="goProduit('${p.id}')" style="cursor:pointer;width:100%;height:100%">${media}</div>
         ${promo>0?`<span class="tag">-${promo}%</span>`:""}
         ${(p.nb_vues||0)>1500?`<span class="tag top">🔥 TOP</span>`:""}
         <button class="fav" onclick="toggleFav('${p.id}')"><span class="${isFav?'':'off'}">${isFav?'❤️':'🤍'}</span></button>
       </div>
       <div class="body">
         <div class="brand-mini">${p.marque||(vit?vit.nom:"")}</div>
-        <h3>${p.nom}</h3>
+        <h3 onclick="goProduit('${p.id}')" style="cursor:pointer">${p.nom}</h3>
         <div class="price-row"><span class="price">${fcfa(p.prix)}</span>${p.prix_barre?`<span class="old">${fcfa(p.prix_barre)}</span>`:""}</div>
         ${p.frais_livraison?`<div class="ship-line">+ ${fcfa(p.frais_livraison)} livraison Mali</div>`:""}
         <button class="addbtn" onclick="addCart('${p.id}')">Ajouter au panier</button>
@@ -312,14 +313,19 @@ function toggleFav(id){
   render();
 }
 
-/* ---------------- Panier ---------------- */
+/* ---------------- Panier (partagé avec produit.html via localStorage) ---------------- */
+const CART_KEY = "sf_cart";
+function loadCart(){ try{ state.cart = JSON.parse(localStorage.getItem(CART_KEY)||"[]"); }catch(e){ state.cart=[]; } }
+function saveCart(){ try{ localStorage.setItem(CART_KEY, JSON.stringify(state.cart)); }catch(e){} }
+function goProduit(id){ location.href = "produit.html?id="+encodeURIComponent(id); }
+
 function addCart(id){
   const p = state.produits.find(x=>x.id===id); if(!p) return;
-  const ex = state.cart.find(x=>x.id===id);
-  if(ex) ex.qty++; else state.cart.push({...p, qty:1});
-  updateBadge(); renderCart(); toast("Ajouté : "+(p.nom||"").slice(0,26));
+  const ex = state.cart.find(x=>x.id===id && !x.taille);
+  if(ex) ex.qty++; else state.cart.push({id:p.id, nom:p.nom, prix:p.prix, frais_livraison:p.frais_livraison, vitrine:p.vitrine, marque:p.marque, images:p.images, qty:1});
+  saveCart(); updateBadge(); renderCart(); toast("Ajouté : "+(p.nom||"").slice(0,26));
 }
-function rmCart(id){ state.cart=state.cart.filter(x=>x.id!==id); updateBadge(); renderCart(); }
+function rmCart(id){ state.cart=state.cart.filter(x=>x.id!==id); saveCart(); updateBadge(); renderCart(); }
 function updateBadge(){ const n=state.cart.reduce((a,b)=>a+b.qty,0); const b=document.getElementById("cartBadge"); b.style.display=n?"flex":"none"; b.textContent=n; }
 
 function renderCart(){
@@ -333,6 +339,7 @@ function renderCart(){
     const lk=look(p); const th = lk.img?`<img src="${lk.img}">`:`<span style="background:${lk.bg};width:100%;height:100%;display:flex;align-items:center;justify-content:center">${lk.e}</span>`;
     return `<div class="ci"><div class="thumb">${th}</div>
       <div class="info"><div class="bm">${p.marque||""}</div><h4>${p.nom}</h4>
+        ${p.taille?`<div style="font-size:11px;color:#6b7280;font-weight:700">Taille : ${p.taille}</div>`:""}
         <div class="p">${fcfa(p.prix)} ${p.qty>1?"× "+p.qty:""}</div>
         ${p.frais_livraison?`<div class="s">+ ${fcfa(p.frais_livraison)} livraison</div>`:""}
       </div><button class="rm" onclick="rmCart('${p.id}')">×</button></div>`;
@@ -362,7 +369,7 @@ async function pay(){
     const d = await r.json();
     if(!r.ok) throw new Error(d.detail||"Erreur commande");
     showOM(d);
-    state.cart=[]; updateBadge();
+    state.cart=[]; saveCart(); updateBadge();
   }catch(e){ toast("Échec : "+e.message); }
   finally{ btn.disabled=false; btn.innerHTML=`<span class="om-logo">OM</span> Commander & payer`; }
 }
@@ -392,6 +399,7 @@ async function init(){
   const c=prochaineCloture();
   document.getElementById("promoDate").textContent="le "+c.label;
   document.getElementById("daysLeft").textContent=c.jours;
+  loadCart(); updateBadge();
   await loadVitrines();
   await loadCats();
   await loadProduits();
