@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SANI-FÉRÉ V2 · Article</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Mulish:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rose:#e11d48;--rose-d:#be123c;--rose-l:#fff1f3;--orange:#f97316;--amber:#f59e0b;--amber-l:#fbbf24;
+  --emerald:#10b981;--emerald-l:#ecfdf5;--ink:#111827;--gray:#6b7280;--gray-l:#9ca3af;
+  --line:#e5e7eb;--line-l:#f3f4f6;--bg:#fafafa;--white:#fff;
+  --grad:linear-gradient(90deg,var(--rose),var(--orange) 55%,var(--amber));
+  --grad-br:linear-gradient(135deg,var(--rose),var(--orange) 60%,var(--amber-l));
+  --shadow:0 4px 16px rgba(17,24,39,.08);--shadow-lg:0 12px 32px rgba(17,24,39,.14);--radius:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Mulish',sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:'Fredoka',sans-serif}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1000px;margin:0 auto;padding:0 16px}
+.promo{background:var(--grad);color:#fff;font-size:13px;font-weight:600;text-align:center;padding:8px 16px}
+.promo span{margin:0 10px;white-space:nowrap}
+header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:30}
+.hbar{display:flex;align-items:center;gap:14px;padding:12px 0}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-mark{width:40px;height:40px;border-radius:12px;background:var(--grad-br);display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Fredoka';font-weight:700;font-size:20px}
+.logo-txt b{font-family:'Fredoka';font-size:18px;line-height:1}.logo-txt b i{color:var(--rose);font-style:normal}
+.logo-txt small{display:block;font-size:10px;color:var(--gray)}
+.spacer{flex:1}
+.cart-link{position:relative;display:flex;flex-direction:column;align-items:center;color:var(--ink);font-size:10px;color:var(--gray)}
+.cart-link .em{font-size:20px}
+.cart-badge{position:absolute;top:-4px;right:-6px;min-width:17px;height:17px;padding:0 4px;border-radius:9px;background:var(--rose);color:#fff;font-size:10px;font-weight:800;display:none;align-items:center;justify-content:center}
+.back{display:inline-flex;align-items:center;gap:6px;color:var(--gray);font-weight:700;font-size:13.5px;margin:18px 0 6px}
+.back:hover{color:var(--rose)}
+
+.detail{display:grid;grid-template-columns:1fr 1fr;gap:32px;padding:10px 0 50px}
+.gallery .main{aspect-ratio:3/4;border-radius:18px;background:#f3f4f6;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:120px;box-shadow:var(--shadow)}
+.gallery .main img{width:100%;height:100%;object-fit:cover}
+.thumbs{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.thumbs img{width:64px;height:80px;object-fit:cover;border-radius:10px;border:2px solid var(--line);cursor:pointer}
+.thumbs img.on{border-color:var(--rose)}
+
+.info .brand{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--orange)}
+.info h1{font-size:26px;font-weight:700;margin:6px 0 14px;line-height:1.2}
+.price-row{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.price{font-family:'Fredoka';font-weight:700;font-size:30px;color:var(--rose)}
+.old{font-size:16px;color:var(--gray-l);text-decoration:line-through}
+.promo-badge{background:var(--rose);color:#fff;font-size:12px;font-weight:800;padding:3px 9px;border-radius:8px}
+.ship{color:var(--emerald);font-weight:700;font-size:14px;margin-bottom:18px}.ship::before{content:"✈ "}
+.sec{border-top:1px solid var(--line);padding:16px 0}
+.sec h3{font-size:13px;text-transform:uppercase;letter-spacing:.5px;color:var(--gray);margin-bottom:10px}
+.desc{font-size:14.5px;line-height:1.6;color:#374151}
+.sizes{display:flex;gap:8px;flex-wrap:wrap}
+.size{padding:9px 16px;border:1.5px solid var(--line);border-radius:10px;font-weight:700;font-size:13.5px;background:#fff;transition:.15s}
+.size:hover{border-color:var(--rose)}
+.size.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.size-one{display:inline-block;padding:7px 14px;background:var(--line-l);border-radius:10px;font-weight:700;font-size:13.5px}
+.qty{display:flex;align-items:center;gap:0;border:1.5px solid var(--line);border-radius:10px;width:fit-content;overflow:hidden}
+.qty button{width:40px;height:40px;font-size:18px;font-weight:700;color:var(--ink)}
+.qty button:hover{background:var(--line-l)}
+.qty span{width:48px;text-align:center;font-weight:800;font-size:15px}
+.addbtn{margin-top:20px;width:100%;padding:16px;border-radius:13px;background:var(--grad);color:#fff;font-family:'Fredoka';font-weight:600;font-size:16px;box-shadow:var(--shadow);transition:.15s;display:flex;align-items:center;justify-content:center;gap:9px}
+.addbtn:hover{filter:brightness(1.05);box-shadow:var(--shadow-lg)}
+.ship-note{margin-top:14px;background:var(--emerald-l);border:1px solid #a7f3d0;border-radius:12px;padding:13px 15px;font-size:13px;color:#065f46;line-height:1.5}
+.added{margin-top:14px;background:var(--rose-l);border:1px solid #fecdd3;border-radius:12px;padding:12px 15px;font-size:13.5px;color:var(--rose-d);display:none;align-items:center;justify-content:space-between;gap:10px}
+.added.show{display:flex}
+.added a{background:var(--ink);color:#fff;padding:8px 14px;border-radius:9px;font-weight:700;font-size:12.5px;white-space:nowrap}
+.state{text-align:center;color:var(--gray);padding:70px 20px}
+.spinner{width:34px;height:34px;border:3px solid var(--line);border-top-color:var(--rose);border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 14px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--ink);color:#fff;padding:13px 22px;border-radius:30px;font-weight:600;font-size:14px;z-index:80;box-shadow:var(--shadow-lg);opacity:0;transition:.3s}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+@media(max-width:760px){ .detail{grid-template-columns:1fr;gap:20px} .gallery .main{font-size:90px} }
+</style>
+</head>
+<body>
+
+<div class="promo">
+  <span>✈ Prochaine expédition vers Bamako : <b id="promoDate">le 25</b></span>
+  <span>📱 Paiement Orange Money</span>
+</div>
+
+<header><div class="wrap hbar">
+  <a class="logo" href="index.html"><div class="logo-mark">S</div>
+    <div class="logo-txt"><b>Sani<i>-Féré</i></b><small>La mode enfant d'Europe, livrée au Mali</small></div>
+  </a>
+  <div class="spacer"></div>
+  <a class="cart-link" href="index.html"><span class="em">🛒</span>Panier<span class="cart-badge" id="cartBadge">0</span></a>
+</div></header>
+
+<div class="wrap">
+  <a class="back" href="index.html">← Retour à la vitrine</a>
+  <div id="content"><div class="state"><div class="spinner"></div>Chargement de l'article…<br><small>Au premier accès, le serveur peut mettre ~50s à se réveiller.</small></div></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const API = "https://sanifere-backend.onrender.com";
+const CART_KEY = "sf_cart";
+const CAT_LOOK = {naissance:{e:"🍼",bg:"#fce7f3"},bebe:{e:"👶",bg:"#e0f2fe"},fille:{e:"👧",bg:"#fef3c7"},garcon:{e:"👦",bg:"#dbeafe"},chaussures:{e:"👟",bg:"#dcfce7"},accessoires:{e:"🧢",bg:"#ede9fe"},_default:{e:"🧺",bg:"#f3f4f6"}};
+const fcfa = n => Math.round(n||0).toLocaleString("fr-FR").replace(/\u202f/g," ")+" FCFA";
+
+let PRODUIT=null, selectedSize=null, qty=1;
+
+function getId(){ return new URLSearchParams(location.search).get("id"); }
+function loadCart(){ try{ return JSON.parse(localStorage.getItem(CART_KEY)||"[]"); }catch(e){ return []; } }
+function saveCart(c){ try{ localStorage.setItem(CART_KEY, JSON.stringify(c)); }catch(e){} }
+function cartCount(){ return loadCart().reduce((a,b)=>a+b.qty,0); }
+function refreshBadge(){ const n=cartCount(), b=document.getElementById("cartBadge"); b.style.display=n?"flex":"none"; b.textContent=n; }
+
+function prochaineCloture(){
+  const t=new Date(); let y=t.getFullYear(), m=t.getMonth();
+  if(t.getDate()>25){ m++; if(m>11){m=0;y++;} }
+  const mois=["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"][m];
+  const d=new Date(y,m,25);
+  const jours=Math.max(0,Math.ceil((d-new Date(t.getFullYear(),t.getMonth(),t.getDate()))/864e5));
+  return {label:`25 ${mois}`, jours};
+}
+
+async function load(){
+  const id=getId();
+  document.getElementById("promoDate").textContent="le "+prochaineCloture().label;
+  refreshBadge();
+  if(!id){ document.getElementById("content").innerHTML=`<div class="state">Aucun article indiqué.<br><a class="size" href="index.html" style="display:inline-block;margin-top:12px">Retour à la vitrine</a></div>`; return; }
+  try{
+    const r = await fetch(API+"/api/produits/"+encodeURIComponent(id));
+    if(!r.ok) throw new Error("introuvable");
+    PRODUIT = await r.json();
+    render();
+  }catch(e){
+    document.getElementById("content").innerHTML=`<div class="state">Cet article est introuvable ou n'est plus disponible.<br><a class="size" href="index.html" style="display:inline-block;margin-top:12px">Retour à la vitrine</a></div>`;
+  }
+}
+
+function render(){
+  const p=PRODUIT;
+  const promo = p.prix_barre ? Math.round((p.prix_barre-p.prix)/p.prix_barre*100) : 0;
+  const lk = CAT_LOOK[p.categorie]||CAT_LOOK._default;
+  const imgs = (p.images||[]).filter(Boolean);
+
+  // Galerie
+  let mainMedia = imgs.length ? `<img id="mainImg" src="${imgs[0]}" alt="${p.nom}">` : `<div style="background:${lk.bg};width:100%;height:100%;display:flex;align-items:center;justify-content:center">${lk.e}</div>`;
+  let thumbs = imgs.length>1 ? `<div class="thumbs">${imgs.map((u,i)=>`<img src="${u}" class="${i===0?'on':''}" onclick="setMain(${i},this)">`).join("")}</div>` : "";
+
+  // Tailles : on découpe le champ "taille" sur les virgules
+  const tailles = (p.taille||"").split(",").map(s=>s.trim()).filter(Boolean);
+  let sizeHtml="";
+  if(tailles.length>=2){
+    sizeHtml = `<div class="sec"><h3>Choisir une taille</h3><div class="sizes">${tailles.map(t=>`<button class="size" onclick="pickSize('${t.replace(/'/g,"")}',this)">${t}</button>`).join("")}</div></div>`;
+  }else if(tailles.length===1){
+    selectedSize = tailles[0];
+    sizeHtml = `<div class="sec"><h3>Taille</h3><span class="size-one">${tailles[0]}</span></div>`;
+  }
+
+  const c = prochaineCloture();
+  document.getElementById("content").innerHTML = `
+    <div class="detail">
+      <div class="gallery">
+        <div class="main">${mainMedia}</div>
+        ${thumbs}
+      </div>
+      <div class="info">
+        <div class="brand">${p.marque||p.vitrine||""}</div>
+        <h1>${p.nom}</h1>
+        <div class="price-row">
+          <span class="price">${fcfa(p.prix)}</span>
+          ${p.prix_barre?`<span class="old">${fcfa(p.prix_barre)}</span>`:""}
+          ${promo>0?`<span class="promo-badge">-${promo}%</span>`:""}
+        </div>
+        ${p.frais_livraison?`<div class="ship">+ ${fcfa(p.frais_livraison)} de livraison jusqu'au Mali</div>`:""}
+        ${p.description?`<div class="sec"><h3>Description</h3><div class="desc">${p.description}</div></div>`:""}
+        ${sizeHtml}
+        <div class="sec"><h3>Quantité</h3>
+          <div class="qty"><button onclick="setQty(-1)">−</button><span id="qtyVal">1</span><button onclick="setQty(1)">+</button></div>
+        </div>
+        <button class="addbtn" onclick="addToCart()">🛒 Ajouter au panier</button>
+        <div class="added" id="added"><span>✓ Ajouté à votre panier</span><a href="index.html">Voir le panier →</a></div>
+        <div class="ship-note">✈ Cet article partira à la prochaine clôture : <b>${c.label}</b> (dans ${c.jours} jours), par avion vers Bamako. Vous payez en FCFA, livraison incluse, en Orange Money.</div>
+      </div>
+    </div>`;
+}
+
+function setMain(i, el){
+  const imgs=(PRODUIT.images||[]).filter(Boolean);
+  document.getElementById("mainImg").src=imgs[i];
+  document.querySelectorAll(".thumbs img").forEach(t=>t.classList.remove("on"));
+  el.classList.add("on");
+}
+function pickSize(t, el){
+  selectedSize=t;
+  document.querySelectorAll(".sizes .size").forEach(s=>s.classList.remove("on"));
+  el.classList.add("on");
+}
+function setQty(d){ qty=Math.max(1, qty+d); document.getElementById("qtyVal").textContent=qty; }
+
+function addToCart(){
+  const p=PRODUIT;
+  const tailles=(p.taille||"").split(",").map(s=>s.trim()).filter(Boolean);
+  if(tailles.length>=2 && !selectedSize){ toast("Choisis une taille d'abord"); return; }
+  const cart=loadCart();
+  const ex=cart.find(x=>x.id===p.id && (x.taille||"")===(selectedSize||""));
+  if(ex){ ex.qty+=qty; }
+  else{ cart.push({id:p.id, nom:p.nom, prix:p.prix, frais_livraison:p.frais_livraison, vitrine:p.vitrine, marque:p.marque, images:p.images, taille:selectedSize||null, qty}); }
+  saveCart(cart); refreshBadge();
+  document.getElementById("added").classList.add("show");
+  toast("Ajouté au panier ✓");
+}
+
+let tt; function toast(m){ const t=document.getElementById("toast"); t.textContent=m; t.classList.add("show"); clearTimeout(tt); tt=setTimeout(()=>t.classList.remove("show"),2200); }
+
+load();
+</script>
+</body>
+</html>
